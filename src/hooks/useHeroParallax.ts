@@ -1,7 +1,7 @@
 "use client";
 
 import { RefObject, useEffect, useState } from "react";
-import { useScroll, useTransform } from "framer-motion";
+import { useScroll, useTransform } from "motion/react";
 
 const MOBILE_BREAKPOINT = 768;
 
