@@ -1,8 +1,12 @@
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+
 export default function Home() {
   return (
     <div>
       <main>
-        <h1>Fablioo</h1>
+        <Hero />
+        <About />
       </main>
     </div>
   );

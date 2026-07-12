@@ -40,7 +40,7 @@ export default function RootLayout({
       lang="fr"
       className={`${archivoBlack.variable} ${sourceSerif.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col pt-20">
+      <body className="min-h-full flex flex-col">
         <Header />
         {children}
       </body>
