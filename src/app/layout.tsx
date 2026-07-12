@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo_Black, Inter, Source_Serif_4 } from "next/font/google";
+import Header from "@/components/layout/Header";
 import "./globals.css";
 
 const archivoBlack = Archivo_Black({
@@ -21,7 +22,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Fablioo",
-  description: "Derrière chaque interface se cache un récit qu'on ne lit pas, mais qu'on ressent.",
+  description:
+    "Derrière chaque interface se cache un récit qu'on ne lit pas, mais qu'on ressent.",
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -34,7 +40,10 @@ export default function RootLayout({
       lang="fr"
       className={`${archivoBlack.variable} ${sourceSerif.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col pt-20">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
