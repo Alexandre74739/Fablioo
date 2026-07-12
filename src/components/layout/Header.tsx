@@ -31,7 +31,7 @@ export default function Header() {
             alt=""
             width={103}
             height={84}
-            className="h-10 w-auto"
+            className="h-10 w-auto mt-2"
           />
         </Link>
 
