@@ -33,27 +33,29 @@ const skills = skillRows.flat();
 
 export default function SkillsCascade() {
   return (
-    <div>
-      <div className="flex flex-wrap justify-center gap-3 lg:hidden">
-        {skills.map((skill, i) => (
-          <Pill key={skill.label} {...skill} index={i} />
-        ))}
-      </div>
-
-      <div className="hidden lg:flex lg:flex-col">
+    <div className="w-full">
+      <div className="flex flex-col items-center sm:hidden lg:flex">
         {skillRows.map((row, ri) => (
           <div
             key={ri}
-            className="flex gap-3"
-            style={{
-              marginTop: ri === 0 ? 0 : 10,
-              marginLeft: ri % 2 === 1 ? 28 : 0,
-            }}
+            className={`flex gap-[clamp(0.5rem,0.3rem+1vw,1rem)] ${
+              ri === 0 ? "mt-0" : "mt-[clamp(0.5rem,0.35rem+0.6vw,0.75rem)]"
+            } ${
+              ri % 2 === 1
+                ? "ml-[clamp(1.5rem,0.8rem+3vw,2.5rem)]"
+                : "ml-[clamp(-1rem,-0.6rem-2vw,0px)]"
+            }`}
           >
             {row.map((skill, ci) => (
               <Pill key={skill.label} {...skill} index={ri * 2 + ci} />
             ))}
           </div>
+        ))}
+      </div>
+
+      <div className="hidden flex-wrap items-center justify-center gap-3 sm:flex lg:hidden">
+        {skills.map((skill, i) => (
+          <Pill key={skill.label} {...skill} index={i} />
         ))}
       </div>
     </div>

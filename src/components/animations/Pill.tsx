@@ -22,9 +22,9 @@ export default function Pill({ label, color, rotate, index }: PillProps) {
       }}
       viewport={{ once: true, amount: 0 }}
       style={{ zIndex: index, position: "relative" }}
-      className={`inline-flex items-center gap-2.5 whitespace-nowrap rounded-full px-8 py-3.5 font-heading text-sm shadow-md select-none sm:text-base ${color}`}
+      className={`inline-flex items-center whitespace-nowrap rounded-full shadow-md select-none gap-[clamp(0.375rem,0.3rem+0.5vw,0.625rem)] px-[clamp(0.75rem,0.4rem+2.5vw,2rem)] py-[clamp(0.5rem,0.35rem+1vw,0.875rem)] font-heading text-[clamp(0.75rem,0.68rem+0.5vw,1rem)] ${color}`}
     >
-      <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-current opacity-50" />
+      <span className="size-[clamp(0.375rem,0.3rem+0.5vw,0.625rem)] shrink-0 rounded-full bg-current opacity-50" />
       {label}
     </motion.div>
   );
