@@ -21,33 +21,61 @@ export default function About() {
 
   return (
     <section className="relative -mt-4 overflow-hidden bg-prune">
-      <div className="container relative z-10 mx-auto px-4">
-        <Reveal delay={0}>
-          <h2 className="text-center text-4xl font-bold text-paper md:text-5xl">
-            Le récit derrière Fablioo
-          </h2>
-        </Reveal>
+      <div className="container relative z-10 mx-auto px-4 py-4 md:py-12 pb-0 md:pb-12 max-w-7xl">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
+          <div className="lg:col-span-8">
+            <Reveal delay={0}>
+              <h2 className="text-4xl font-bold text-paper md:text-5xl">
+                Il était{" "}
+                <span className="text-sand font-quote font-semibold italic">
+                  deux fois
+                </span>{" "}
+                Fablioo
+              </h2>
+            </Reveal>
 
-        <Reveal delay={0.2}>
-          <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-relaxed text-paper/80 md:text-xl">
-            Un processus qui se vit comme une histoire derrière un écran.
-          </p>
-        </Reveal>
+            <div className="mt-6 flex flex-col gap-4 text-lg text-paper/80 leading-relaxed md:text-xl">
+              <Reveal delay={0.2}>
+                <p className="max-w-2xl">
+                  Les histoires commencent par "il était une fois". Fablioo
+                  commence par "il était deux fois". Une fois pour{" "}
+                  <strong className="text-paper">
+                    {" "}
+                    l'histoire qu'on raconte
+                  </strong>
+                  , la vôtre, celle de votre métier, de vos clients, de ce qui
+                  vous rend différent.
+                </p>
+              </Reveal>
+              <Reveal delay={0.4}>
+                <p className="max-w-2xl">
+                  Une fois pour{" "}
+                  <strong className="text-paper">
+                    {" "}
+                    la façon de la raconter
+                  </strong>{" "}
+                  : un site pensé comme un récit, où chaque écran est une page
+                  qu'on a envie de tourner.
+                </p>
+              </Reveal>
+            </div>
 
-        <Reveal delay={0.4}>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button
-              content="Découvrir nos récits"
-              href="/recits"
-              style="secondary"
-            />
-            <Button
-              content="Voir le portfolio"
-              href="/portfolio"
-              style="tertiary"
-            />
+            <Reveal delay={0.6}>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Button
+                  content="Découvrir nos récits"
+                  href="/recits"
+                  style="secondary"
+                />
+                <Button
+                  content="Voir le portfolio"
+                  href="/portfolio"
+                  style="link-muted"
+                />
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </div>
 
       <motion.div
