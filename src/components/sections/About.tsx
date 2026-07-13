@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
+import SkillsCascade from "@/components/sections/SkillsCascade";
 
 export default function About() {
   const waveRef = useRef<HTMLDivElement>(null);
@@ -21,9 +22,9 @@ export default function About() {
 
   return (
     <section className="relative -mt-4 overflow-hidden bg-prune">
-      <div className="container relative z-10 mx-auto px-4 py-4 md:py-12 pb-0 md:pb-12 max-w-7xl">
+      <div className="relative z-10 mx-auto max-w-7xl px-8 py-4 pb-0 md:py-12 md:pb-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-7">
             <Reveal delay={0}>
               <h2 className="text-4xl font-bold text-paper md:text-5xl">
                 Il était{" "}
@@ -74,6 +75,10 @@ export default function About() {
                 />
               </div>
             </Reveal>
+          </div>
+
+          <div className="lg:col-span-5">
+            <SkillsCascade />
           </div>
         </div>
       </div>
