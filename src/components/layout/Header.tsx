@@ -9,7 +9,7 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { label: "Récits", href: "/recits" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Tarifs", href: "/tarifs" },
+  { label: "Services", href: "/services" },
 ];
 
 export default function Header() {
@@ -34,14 +34,14 @@ export default function Header() {
       >
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo-ecrit.svg"
+            src="logo/logo-ecrit.svg"
             alt="Fablioo"
             width={122}
             height={32}
             className="h-8 w-auto"
           />
           <Image
-            src="/logo-icone.svg"
+            src="logo/logo-icone.svg"
             alt=""
             width={103}
             height={84}
