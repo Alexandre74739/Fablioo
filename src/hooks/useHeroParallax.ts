@@ -35,28 +35,16 @@ export function useHeroParallax(sectionRef: RefObject<HTMLElement | null>) {
   const decorY = useTransform(
     scrollYProgress,
     [0, 1],
-    [0, viewportHeight * (isMobile ? -0.09 : -0.18)],
+    [0, viewportHeight * (isMobile ? -0.2 : -0.4)],
   );
-  // Le premier plan monte pour recouvrir le centre, puis continue de monter
-  // jusqu'à couvrir tout l'écran en fin de scroll : la section suivante
-  // s'enchaîne alors directement sur "Pierre" plutôt que sur un vide.
+  const forestMaxTranslate = viewportHeight * (isMobile ? 0.5 : 0.65);
   const forestY = useTransform(
     scrollYProgress,
     [0, 1],
-    [0, viewportHeight * (isMobile ? -0.5 : -0.65)],
+    [0, -forestMaxTranslate],
   );
-  const stoneY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, viewportHeight * -0.95],
-  );
-  const contentY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, viewportHeight * (isMobile ? 0.1 : 0.2)],
-  );
-  // L'oiseau ne fait que sortir par la gauche : jamais de mouvement vertical,
-  // donc il ne peut jamais passer au-dessus du header.
+  const stoneMaxTranslate = viewportHeight * 0.2;
+  const stoneY = useTransform(scrollYProgress, [0, 1], [0, -stoneMaxTranslate]);
   const birdX = useTransform(
     scrollYProgress,
     [0, 1],
@@ -68,7 +56,8 @@ export function useHeroParallax(sectionRef: RefObject<HTMLElement | null>) {
     decorY,
     birdX,
     forestY,
+    forestMaxTranslate,
     stoneY,
-    contentY,
+    stoneMaxTranslate,
   };
 }

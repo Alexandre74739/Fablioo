@@ -9,8 +9,15 @@ import { useHeroParallax } from "@/hooks/useHeroParallax";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { skyY, decorY, birdX, forestY, stoneY, contentY } =
-    useHeroParallax(sectionRef);
+  const {
+    skyY,
+    decorY,
+    birdX,
+    forestY,
+    forestMaxTranslate,
+    stoneY,
+    stoneMaxTranslate,
+  } = useHeroParallax(sectionRef);
 
   return (
     <section ref={sectionRef} className="relative h-[130vh] w-full bg-paper">
@@ -42,7 +49,7 @@ export default function Hero() {
         </motion.div>
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 md:origin-bottom md:scale-y-[0.85]">
-          <motion.div style={{ y: forestY }}>
+          <motion.div style={{ y: forestY }} className="relative">
             <Image
               src="/Forêt.svg"
               alt=""
@@ -50,13 +57,16 @@ export default function Hero() {
               height={630}
               className="h-auto w-full"
             />
+            {/* Aplat qui traîne sous Forêt : comble l'espace qu'elle laisse
+                en montant, invisible sous l'écran tant qu'elle est au repos. */}
+            <div
+              className="absolute inset-x-0 bg-[#EBE2CE]"
+              style={{ top: "calc(100% - 2px)", height: forestMaxTranslate + 2 }}
+            />
           </motion.div>
         </div>
 
-        <motion.div
-          style={{ y: contentY }}
-          className="absolute inset-0 z-35 flex flex-col items-center justify-center gap-6 px-6 text-center"
-        >
+        <div className="absolute inset-0 z-35 flex flex-col items-center justify-center gap-6 px-6 text-center">
           <Reveal delay={0}>
             <div className="flex flex-col items-center">
               <Image
@@ -77,7 +87,7 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="max-w-xl font-quote text-xl italic text-encre md:text-2xl">
+            <p className="max-w-xl font-quote text-xl italic text-prune md:text-2xl">
               Derrière chaque interface se cache un récit qu'on ne lit pas,
               mais qu'on ressent.
             </p>
@@ -90,16 +100,22 @@ export default function Hero() {
               style="primary"
             />
           </Reveal>
-        </motion.div>
+        </div>
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 md:origin-bottom md:scale-y-[0.85]">
-          <motion.div style={{ y: stoneY }}>
+          <motion.div style={{ y: stoneY }} className="relative">
             <Image
               src="/Pierre.svg"
               alt=""
               width={1280}
               height={297}
               className="h-auto w-full"
+            />
+            {/* Aplat qui traîne sous Pierre : comble l'espace qu'elle laisse
+                en montant, invisible sous l'écran tant qu'elle est au repos. */}
+            <div
+              className="absolute inset-x-0 bg-prune"
+              style={{ top: "calc(100% - 2px)", height: stoneMaxTranslate + 2 }}
             />
           </motion.div>
         </div>
