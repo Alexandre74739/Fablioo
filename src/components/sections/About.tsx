@@ -100,7 +100,7 @@ export default function About() {
               </h2>
             </Reveal>
 
-            <div className="mt-6 flex flex-col gap-4 text-lg text-paper/80 leading-relaxed md:text-xl">
+            <div className="mt-5 flex flex-col gap-4 text-lg text-paper/80 leading-relaxed md:text-xl">
               <Reveal delay={0.2}>
                 <p className="max-w-2xl">
                   Les histoires commencent par "il était une fois". Fablioo
@@ -161,7 +161,7 @@ export default function About() {
         />
         {/* comble l'espace laissé par la vague en montant */}
         <div
-          className="absolute inset-x-0 bg-paper"
+          className="absolute inset-x-0 bg-[#eee9db]"
           style={{ top: "calc(100% - 2px)", height: waveMaxTranslate + 2 }}
         />
       </motion.div>
