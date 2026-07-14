@@ -7,7 +7,12 @@ import Button from "@/components/ui/Button";
 import Reveal from "@/components/animations/Reveal";
 import { useHeroParallax } from "@/hooks/useHeroParallax";
 
-export default function Hero() {
+interface HeroProps {
+  quote: string;
+  content: string;
+}
+
+export default function Hero({ quote, content }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const {
     skyY,
@@ -61,7 +66,10 @@ export default function Hero() {
                 en montant, invisible sous l'écran tant qu'elle est au repos. */}
             <div
               className="absolute inset-x-0 bg-[#EBE2CE]"
-              style={{ top: "calc(100% - 2px)", height: forestMaxTranslate + 2 }}
+              style={{
+                top: "calc(100% - 2px)",
+                height: forestMaxTranslate + 2,
+              }}
             />
           </motion.div>
         </div>
@@ -88,14 +96,13 @@ export default function Hero() {
 
           <Reveal delay={0.2}>
             <p className="max-w-xl font-quote text-xl italic text-prune md:text-2xl">
-              "Derrière chaque interface se cache un récit qu'on ne lit pas,
-              mais qu'on ressent"
+              {quote}
             </p>
           </Reveal>
 
           <Reveal delay={0.4}>
             <Button
-              content="Découvrir nos services"
+              content={content}
               href="/services"
               style="primary"
             />

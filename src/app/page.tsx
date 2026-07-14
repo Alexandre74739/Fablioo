@@ -6,7 +6,10 @@ export default function Home() {
   return (
     <div>
       <main>
-        <Hero />
+        <Hero
+          quote="Derrière chaque interface se cache un récit qu'on ne lit pas, mais qu'on ressent"
+          content="Découvrez nos services"
+        />
         <About />
         <Products />
       </main>

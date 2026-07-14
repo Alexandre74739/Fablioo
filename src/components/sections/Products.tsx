@@ -87,7 +87,7 @@ export default function Products() {
           </Reveal>
 
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
-            <Reveal delay={0.2}>
+            <Reveal delay={0.2} className="lg:mt-8">
               <Card
                 imageSrc="/illustrations/left-fox.png"
                 width={219}
@@ -111,7 +111,7 @@ export default function Products() {
             </Reveal>
             <Reveal
               delay={0.6}
-              className="sm:col-span-2 sm:mx-auto sm:w-full sm:max-w-[calc(50%-0.75rem)] lg:col-span-1 lg:mx-0 lg:max-w-none"
+              className="sm:col-span-2 sm:mx-auto sm:w-full sm:max-w-[calc(50%-0.75rem)] lg:col-span-1 lg:mx-0 lg:mt-8 lg:max-w-none"
             >
               <Card
                 imageSrc="/illustrations/right-fox.png"
