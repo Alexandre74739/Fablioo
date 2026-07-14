@@ -127,17 +127,19 @@ export default function About() {
             </div>
 
             <Reveal delay={0.6}>
-              <div className="mt-10 flex flex-wrap gap-4">
+              <div className="mt-10 flex flex-wrap gap-4 ">
                 <Button
                   content="Découvrir nos récits"
                   href="/recits"
                   style="secondary"
                 />
-                <Button
-                  content="Voir le portfolio"
-                  href="/portfolio"
-                  style="link-muted"
-                />
+                <div className="-ml-3 sm:ml-0">
+                  <Button
+                    content="Feuilleter le portfolio"
+                    href="/portfolio"
+                    style="link-muted"
+                  />
+                </div>
               </div>
             </Reveal>
           </div>

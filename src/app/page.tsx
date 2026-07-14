@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Products from "@/components/sections/Products";
+import Process from "@/components/sections/Process";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         />
         <About />
         <Products />
+        <Process />
       </main>
     </div>
   );
