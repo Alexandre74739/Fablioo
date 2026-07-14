@@ -77,7 +77,7 @@ export default function Products() {
           <Reveal delay={0.2}>
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-4xl font-bold md:text-5xl">
-                Des designs qui vous ressemblent
+                Des idées qui vous ressemblent
               </h2>
               <p className="mt-4 text-lg md:text-xl">
                 Chaque projet est une histoire à découvrir, et Fablioo vous
