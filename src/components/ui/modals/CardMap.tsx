@@ -99,7 +99,7 @@ export default function CardMap({
                 onClose();
               }
             }}
-            className="relative flex max-h-[75vh] w-full flex-col overflow-xy-hidden rounded-t-3xl bg-paper shadow-xl sm:max-w-lg sm:rounded-3xl"
+            className="relative flex max-h-[75vh] w-full flex-col overflow-hidden rounded-t-3xl bg-paper shadow-xl sm:max-w-lg sm:rounded-3xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 opacity-70">
