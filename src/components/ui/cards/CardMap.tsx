@@ -3,8 +3,7 @@
 import { type LucideIcon } from "lucide-react";
 import Button from "@/components/ui/Button";
 
-type Side = "left" | "right";
-type Lines = 2 | 3 | 4;
+export type Lines = 2 | 3 | 4;
 
 const clampClasses: Record<Lines, string> = {
   2: "line-clamp-2",
@@ -17,7 +16,7 @@ interface CardMapProps {
   title: string;
   description: string;
   icon: LucideIcon;
-  side: Side;
+  side: "left" | "right";
   onDiscover: () => void;
   lines?: Lines;
 }

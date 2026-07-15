@@ -1,6 +1,5 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import { motion } from "motion/react";
 
 const pawGroups: string[][] = [
@@ -145,17 +144,17 @@ const CYCLE = (pawGroups.length - 1) * STEP + PAW_DURATION + PAUSE;
 
 interface PawTrailProps {
   className?: string;
-  style?: CSSProperties;
+  rotate?: number;
 }
 
-export default function PawTrail({ className, style }: PawTrailProps) {
+export default function PawTrail({ className, rotate }: PawTrailProps) {
   return (
     <svg
       viewBox="0 0 218 547"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      style={style}
+      style={rotate !== undefined ? { rotate: `${rotate}deg` } : undefined}
     >
       {pawGroups.map((paths, index) => (
         <motion.g

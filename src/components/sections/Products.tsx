@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
+import FloatingBlob from "@/components/animations/FloatingBlob";
 import Reveal from "@/components/animations/Reveal";
 import PawTrail from "@/components/animations/PawTrail";
 import Card from "@/components/ui/cards/Card";
@@ -23,49 +24,37 @@ export default function Products() {
   return (
     <section className="relative overflow-hidden bg-sand/20">
       <div className="relative">
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 6, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute -left-24 top-8 h-44 w-64 md:h-56 md:w-80"
-        >
-          <Image src="/shapes/blob-1.svg" alt="" fill />
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, 18, 0], rotate: [0, -8, 0] }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="pointer-events-none absolute -right-16 top-1/4 h-64 w-40 md:h-80 md:w-52"
-        >
-          <Image src="/shapes/blob-2.svg" alt="" fill />
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, -14, 0], rotate: [0, 5, 0] }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5,
-          }}
-          className="pointer-events-none absolute -bottom-20 left-1/5 h-52 w-52 md:h-64 md:w-64"
-        >
-          <Image src="/shapes/blob-3.svg" alt="" fill />
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, 16, 0], rotate: [0, -6, 0] }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5,
-          }}
-          className="pointer-events-none absolute right-1/8 -bottom-16 hidden h-60 w-60 lg:block"
-        >
-          <Image src="/shapes/blob-4.svg" alt="" fill />
-        </motion.div>
+        <FloatingBlob
+          src="/shapes/blob-1.svg"
+          className="-left-24 top-8 h-44 w-64 md:h-56 md:w-80"
+          duration={9}
+          yRange={20}
+          rotateRange={6}
+        />
+        <FloatingBlob
+          src="/shapes/blob-2.svg"
+          className="-right-16 top-1/4 h-64 w-40 md:h-80 md:w-52"
+          duration={8}
+          delay={1}
+          yRange={-18}
+          rotateRange={-8}
+        />
+        <FloatingBlob
+          src="/shapes/blob-3.svg"
+          className="-bottom-20 left-1/5 h-52 w-52 md:h-64 md:w-64"
+          duration={7}
+          delay={0.5}
+          yRange={14}
+          rotateRange={5}
+        />
+        <FloatingBlob
+          src="/shapes/blob-4.svg"
+          className="right-1/8 -bottom-16 hidden h-60 w-60 lg:block"
+          duration={10}
+          delay={1.5}
+          yRange={-16}
+          rotateRange={-6}
+        />
         <div className="pointer-events-none absolute -right-8 -bottom-92 hidden h-140 w-56 -translate-y-1/2 rotate-180 opacity-70 md:block">
           <PawTrail className="h-full w-full" />
         </div>

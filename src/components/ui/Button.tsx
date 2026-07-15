@@ -11,6 +11,11 @@ type ButtonStyle =
 
 type ButtonSize = "fine" | "large";
 
+const sizeStyles: Record<ButtonSize, string> = {
+  large: "px-6 py-3 text-base rounded-xl",
+  fine: "px-4 py-1.5 text-xs rounded-md",
+};
+
 interface ButtonProps {
   content: string;
   href?: string;
@@ -28,11 +33,6 @@ export default function Button({
   active,
   onClick,
 }: ButtonProps) {
-  const sizeStyles: Record<ButtonSize, string> = {
-    large: "px-6 py-3 text-base rounded-xl",
-    fine: "px-4 py-1.5 text-xs rounded-md",
-  };
-
   const baseStyles = `group inline-block font-heading transition-ease duration-300 text-center cursor-pointer ${sizeStyles[size]}`;
 
   const styles: Record<ButtonStyle, string> = {

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "motion/react";
 import {
   Lightbulb,
   MessageCircle,
@@ -11,20 +10,18 @@ import {
   SlidersHorizontal,
   type LucideIcon,
 } from "lucide-react";
+import FloatingBlob from "@/components/animations/FloatingBlob";
 import PawTrail from "@/components/animations/PawTrail";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
-import CardMap from "@/components/ui/cards/CardMap";
+import CardMap, { type Lines } from "@/components/ui/cards/CardMap";
 import CardMapModal from "@/components/ui/modals/CardMap";
-
-type Side = "left" | "right";
-type Lines = 2 | 3 | 4;
 
 const steps: {
   title: string;
   description: string;
   details: string;
-  side: Side;
+  side: "left" | "right";
   icon: LucideIcon;
   lines?: Lines;
   positionClass: string;
@@ -82,15 +79,15 @@ const steps: {
 ];
 
 const pawTraces: { positionClass: string; rotate: number }[] = [
-  { positionClass: "top-[8%] -left-[20%]  h-140 w-56", rotate: 170 },
+  { positionClass: "top-[8%] -left-[20%]", rotate: 170 },
   {
     positionClass:
-      "top-[40%] md:top-[48%] -right-[45%] md:-right-[40%] lg:-right-[25%] xl:-right-[35%] h-140 w-56",
+      "top-[40%] md:top-[48%] -right-[45%] md:-right-[40%] lg:-right-[25%] xl:-right-[35%]",
     rotate: 188,
   },
   {
     positionClass:
-      "hidden md:block top-[80%] -left-[23.5%] lg:-left-[17.5%] xl:-left-[27.5%] h-140 w-56",
+      "hidden md:block top-[80%] -left-[23.5%] lg:-left-[17.5%] xl:-left-[27.5%]",
     rotate: 174,
   },
 ];
@@ -100,61 +97,45 @@ export default function Process() {
 
   return (
     <section className="relative overflow-hidden bg-paper">
-      <motion.div
-        animate={{ y: [0, -20, 0], rotate: [0, 6, 0] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -left-32 top-4 h-56 w-72 md:h-72 md:w-96"
-      >
-        <Image src="/shapes/blob-1.svg" alt="" fill />
-      </motion.div>
-      <motion.div
-        animate={{ y: [0, 16, 0], rotate: [0, -5, 0] }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-        className="pointer-events-none absolute -right-20 top-1/5 h-52 w-52 md:h-72 md:w-72"
-      >
-        <Image src="/shapes/blob-1.svg" alt="" fill />
-      </motion.div>
-      <motion.div
-        animate={{ y: [0, -16, 0], rotate: [0, 5, 0] }}
-        transition={{
-          duration: 8.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1.2,
-        }}
-        className="hidden sm:block pointer-events-none absolute -left-20 top-1/2 h-60 w-60 md:h-80 md:w-80"
-      >
-        <Image src="/shapes/blob-3.svg" alt="" fill />
-      </motion.div>
-      <motion.div
-        animate={{ y: [0, 18, 0], rotate: [0, -6, 0] }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-        className="hidden sm:block pointer-events-none absolute -right-32 bottom-1/4 h-60 w-60 md:h-80 md:w-80"
-      >
-        <Image src="/shapes/blob-4.svg" alt="" fill />
-      </motion.div>
-      <motion.div
-        animate={{ y: [0, 20, 0], rotate: [0, 6, 0] }}
-        transition={{
-          duration: 9.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.7,
-        }}
-        className="pointer-events-none absolute -left-40 md:-left-20 bottom-4 h-52 w-52 scale-x-[-1] md:h-72 md:w-72"
-      >
-        <Image src="/shapes/blob-1.svg" alt="" fill />
-      </motion.div>
+      <FloatingBlob
+        src="/shapes/blob-1.svg"
+        className="-left-32 top-4 h-56 w-72 md:h-72 md:w-96"
+        duration={9}
+        yRange={20}
+        rotateRange={6}
+      />
+      <FloatingBlob
+        src="/shapes/blob-1.svg"
+        className="-right-20 top-1/5 h-52 w-52 md:h-72 md:w-72"
+        duration={7}
+        delay={0.5}
+        yRange={-16}
+        rotateRange={-5}
+      />
+      <FloatingBlob
+        src="/shapes/blob-3.svg"
+        className="hidden sm:block -left-20 top-1/2 h-60 w-60 md:h-80 md:w-80"
+        duration={8.5}
+        delay={1.2}
+        yRange={16}
+        rotateRange={5}
+      />
+      <FloatingBlob
+        src="/shapes/blob-4.svg"
+        className="hidden sm:block -right-32 bottom-1/4 h-60 w-60 md:h-80 md:w-80"
+        duration={8}
+        delay={1}
+        yRange={-18}
+        rotateRange={-6}
+      />
+      <FloatingBlob
+        src="/shapes/blob-1.svg"
+        className="-left-40 md:-left-20 bottom-4 h-52 w-52 scale-x-[-1] md:h-72 md:w-72"
+        duration={9.5}
+        delay={0.7}
+        yRange={-20}
+        rotateRange={6}
+      />
 
       <div className="container relative z-10 mx-auto max-w-6xl px-4 py-16 md:py-24">
         <Reveal>
@@ -211,8 +192,8 @@ export default function Process() {
           {pawTraces.map((trace, i) => (
             <PawTrail
               key={i}
-              className={`pointer-events-none absolute opacity-70 ${trace.positionClass}`}
-              style={{ rotate: `${trace.rotate}deg` }}
+              className={`pointer-events-none absolute h-140 w-56 opacity-70 ${trace.positionClass}`}
+              rotate={trace.rotate}
             />
           ))}
 
