@@ -3,6 +3,7 @@ import About from "@/components/sections/About";
 import Products from "@/components/sections/Products";
 import Process from "@/components/sections/Process";
 import Bandeau from "@/components/sections/Bandeau";
+import Faq from "@/components/sections/Faq";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
           label="Je passe à l'action "
           href="/contact"
         />
+        <Faq />
       </main>
     </div>
   );

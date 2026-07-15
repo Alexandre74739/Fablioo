@@ -121,17 +121,17 @@ export default function Bandeau({
               className="h-16 w-auto md:h-20"
             />
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.2}>
             <h2 className="text-4xl font-bold text-paper md:text-5xl">
               {title}
             </h2>
           </Reveal>
-          <Reveal delay={0.2}>
+          <Reveal delay={0.4}>
             <p className="max-w-xl text-lg text-paper/80 leading-relaxed md:text-xl">
               {description}
             </p>
           </Reveal>
-          <Reveal delay={0.4} className="mt-3">
+          <Reveal delay={0.6} className="mt-3">
             <Button content={label} href={href} style="secondary" />
           </Reveal>
         </div>
