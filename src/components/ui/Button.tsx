@@ -9,10 +9,13 @@ type ButtonStyle =
   | "link-muted"
   | "nav";
 
+type ButtonSize = "fine" | "large";
+
 interface ButtonProps {
   content: string;
   href?: string;
   style?: ButtonStyle;
+  size?: ButtonSize;
   active?: boolean;
   onClick?: () => void;
 }
@@ -21,11 +24,16 @@ export default function Button({
   content,
   href,
   style = "primary",
+  size = "large",
   active,
   onClick,
 }: ButtonProps) {
-  const baseStyles =
-    "group inline-block rounded-xl px-6 py-3 font-heading transition-ease duration-300 text-center cursor-pointer";
+  const sizeStyles: Record<ButtonSize, string> = {
+    large: "px-6 py-3 text-base rounded-xl",
+    fine: "px-4 py-1.5 text-xs rounded-md",
+  };
+
+  const baseStyles = `group inline-block font-heading transition-ease duration-300 text-center cursor-pointer ${sizeStyles[size]}`;
 
   const styles: Record<ButtonStyle, string> = {
     primary: "bg-rosewood text-paper hover:bg-prune",
@@ -34,17 +42,19 @@ export default function Button({
       "bg-transparent text-paper border border-paper/40 hover:bg-paper/10",
     "link-base": "bg-transparent text-rosewood border-none hover:text-prune",
     "link-muted": "bg-transparent text-paper border-none hover:text-paper/80",
-    nav: active
-      ? "bg-prune text-paper text-sm"
-      : "bg-sand/40 text-encre text-sm hover:bg-sand",
+    nav: active ? "bg-prune text-paper" : "bg-sand/40 text-encre hover:bg-sand",
   };
   const variantStyles = styles[style];
+
+  const iconSize = size === "fine" ? "h-3.5 w-3.5" : "h-4 w-4";
 
   const label =
     style === "link-base" || style === "link-muted" ? (
       <span className="link-underline inline-flex items-center gap-1.5">
         <span>{content}</span>
-        <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+        <ArrowRight
+          className={`${iconSize} shrink-0 transition-transform duration-300 group-hover:translate-x-1`}
+        />
       </span>
     ) : (
       content

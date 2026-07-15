@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "@/components/animations/Reveal";
 import PawTrail from "@/components/animations/PawTrail";
-import Card from "@/components/ui/Card";
+import Card from "@/components/ui/cards/Card";
 
 export default function Products() {
   const waveRef = useRef<HTMLDivElement>(null);
@@ -69,7 +69,7 @@ export default function Products() {
         <div className="pointer-events-none absolute -right-8 -bottom-92 hidden h-140 w-56 -translate-y-1/2 rotate-180 opacity-70 md:block">
           <PawTrail className="h-full w-full" />
         </div>
-        <div className="pointer-events-none absolute -left-8 bottom-20 hidden h-140 w-56 -translate-y-1/2 opacity-70 md:block">
+        <div className="pointer-events-none absolute -left-8 bottom-4 hidden h-140 w-56 -translate-y-1/2 opacity-70 md:block">
           <PawTrail className="h-full w-full" />
         </div>
 

@@ -3,34 +3,31 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
+import {
+  Lightbulb,
+  MessageCircle,
+  PenTool,
+  Rocket,
+  SlidersHorizontal,
+  type LucideIcon,
+} from "lucide-react";
+import PawTrail from "@/components/animations/PawTrail";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
-import CardMap from "@/components/ui/modals/CardMap";
+import CardMap from "@/components/ui/cards/CardMap";
+import CardMapModal from "@/components/ui/modals/CardMap";
 
 type Side = "left" | "right";
-type Position = {
-  top?: string;
-  bottom?: string;
-  left?: string;
-  right?: string;
-};
-
 type Lines = 2 | 3 | 4;
-const clampClasses: Record<Lines, string> = {
-  2: "line-clamp-2",
-  3: "line-clamp-3",
-  4: "line-clamp-4",
-};
 
 const steps: {
   title: string;
   description: string;
   details: string;
   side: Side;
-  position?: Position;
-  positionClass?: string;
+  icon: LucideIcon;
   lines?: Lines;
-  offsetY?: number;
+  positionClass: string;
 }[] = [
   {
     title: "L'écoute",
@@ -39,7 +36,8 @@ const steps: {
     details:
       "On échange sur votre histoire, votre métier et vos objectifs pour poser les bases du récit. Cette première rencontre permet de comprendre votre univers, vos couleurs, votre ton... En bref, ce qui fait de votre projet quelque chose d'unique, et cela avant même d'esquisser quoi que ce soit. On parle de vos clients, de ce qui vous rend différent, des contraintes techniques et du budget, pour que chaque étape suivante s'appuie sur des bases claires et partagées. C'est aussi le moment où on définit ensemble le ton du récit : sérieux, ludique, chaleureux, épuré... Pour construire le conte qui vous ressemble vraiment.",
     side: "right",
-    positionClass: "top-[16%] sm:top-[16%] lg:top-[17%] left-[22.5%]",
+    icon: MessageCircle,
+    positionClass: "top-[6%] left-[45%] lg:left-[50%]",
   },
   {
     title: "Le déclic créatif",
@@ -48,9 +46,8 @@ const steps: {
     details:
       "Une direction artistique se dessine, fidèle à votre univers et à ce qui vous rend unique. Palette, typographies, ambiance visuelle : chaque choix est pensé pour que votre identité raconte une histoire cohérente, du premier coup d'œil au moindre détail. On explore plusieurs pistes, on confronte les idées, jusqu'à trouver la direction qui capture le mieux l'esprit de votre marque. Rien n'est figé trop tôt : c'est une phase de recherche où l'on teste, on affine, on élimine, jusqu'à ce que l'évidence s'impose.",
     side: "left",
-    positionClass:
-      "top-[26.75%] sm:top-[28%] md:top-[29.5%] lg:top-[30.5%] right-[22.5%]",
-    offsetY: 24,
+    icon: Lightbulb,
+    positionClass: "top-[25%] right-[16%]",
   },
   {
     title: "La création",
@@ -59,7 +56,8 @@ const steps: {
     details:
       "Maquettes et développement prennent forme, chaque détail pensé avec soin. Les pages s'articulent, les interactions prennent vie, et votre site commence à ressembler à l'histoire qu'on avait imaginée ensemble. C'est la phase la plus longue mais aussi la plus gratifiante : on construit l'architecture, on code chaque composant, on soigne les animations et les micro-interactions qui donnent du caractère à l'ensemble. Bien sûr, vous êtes tenu informé à chaque avancée, avec des points réguliers pour ajuster le cap si besoin.",
     side: "right",
-    positionClass: "top-[46%] sm:top-[46%] md:top-[47%] left-[34%]",
+    icon: PenTool,
+    positionClass: "top-[43.5%] left-[15%] lg:top-[45%]",
   },
   {
     title: "Les ajustements",
@@ -68,7 +66,8 @@ const steps: {
     details:
       "Tests, retours et ajustements affinent le récit jusqu'à ce qu'il sonne juste. On vérifie chaque écran, chaque parcours, pour que l'expérience soit fluide sur tous les appareils avant de passer à l'étape finale. C'est le moment des allers-retours : vous testez, vous nous faites vos retours, et on peaufine ensemble le résultat. On vérifie aussi les performances, l'accessibilité et le référencement pour que le site soit aussi solide en coulisses qu'à l'écran.",
     side: "left",
-    positionClass: "top-[61.25%] sm:top-[61%] md:top-[62%] right-[11%]",
+    icon: SlidersHorizontal,
+    positionClass: "top-[62%] right-[44%] lg:top-[64%] lg:right-[50%]",
   },
   {
     title: "La publication",
@@ -77,8 +76,22 @@ const steps: {
     details:
       "Votre site est mis en ligne, suivi et accompagné pour continuer à grandir. Au-delà du lancement, on reste à vos côtés pour les mises à jour, les évolutions et les nouvelles envies de votre histoire. C'est un nouveau chapitre qui commence : on surveille la sécurité, on accompagne les premières visites, et on reste disponible pour faire évoluer le site au rythme de votre activité. Votre histoire ne s'arrête pas à la mise en ligne, elle continue de s'écrire avec vous.",
     side: "right",
+    icon: Rocket,
+    positionClass: "top-[85.5%] left-[25%]",
+  },
+];
+
+const pawTraces: { positionClass: string; rotate: number }[] = [
+  { positionClass: "top-[8%] -left-[20%]  h-140 w-56", rotate: 170 },
+  {
     positionClass:
-      "bottom-[15%] sm:bottom-[15.25%] md:bottom-[16%] lg:bottom-[17%], left-[11%]",
+      "top-[40%] md:top-[48%] -right-[45%] md:-right-[40%] lg:-right-[25%] xl:-right-[35%] h-140 w-56",
+    rotate: 188,
+  },
+  {
+    positionClass:
+      "hidden md:block top-[80%] -left-[23.5%] lg:-left-[17.5%] xl:-left-[27.5%] h-140 w-56",
+    rotate: 174,
   },
 ];
 
@@ -90,7 +103,7 @@ export default function Process() {
       <motion.div
         animate={{ y: [0, -20, 0], rotate: [0, 6, 0] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -left-24 top-4 h-56 w-72 md:h-72 md:w-96"
+        className="pointer-events-none absolute -left-32 top-4 h-56 w-72 md:h-72 md:w-96"
       >
         <Image src="/shapes/blob-1.svg" alt="" fill />
       </motion.div>
@@ -168,72 +181,63 @@ export default function Process() {
           </div>
         </Reveal>
 
+        <div className="mt-8 flex flex-col gap-6 sm:hidden">
+          {steps.map((step, i) => (
+            <Reveal key={step.title} delay={i * 0.2}>
+              <CardMap
+                number={i + 1}
+                title={step.title}
+                description={step.description}
+                icon={step.icon}
+                side={step.side}
+                lines={step.lines}
+                onDiscover={() => setActiveStep(i)}
+              />
+            </Reveal>
+          ))}
+        </div>
+
         <div
-          className="relative mx-auto mt-16 w-full max-w-88 sm:max-w-lg md:max-w-2xl lg:max-w-4xl"
-          style={{ aspectRatio: "1034 / 1588" }}
+          className="relative mx-auto mt-8 hidden w-full sm:block sm:max-w-lg md:max-w-2xl lg:max-w-4xl"
+          style={{ aspectRatio: "1067 / 2374" }}
         >
           <Image
             src="/illustrations/map-chemin.svg"
             alt=""
             fill
-            className="object-contain"
+            className="object-fill"
           />
+
+          {pawTraces.map((trace, i) => (
+            <PawTrail
+              key={i}
+              className={`pointer-events-none absolute opacity-70 ${trace.positionClass}`}
+              style={{ rotate: `${trace.rotate}deg` }}
+            />
+          ))}
 
           {steps.map((step, i) => (
             <div
               key={step.title}
-              className={`absolute w-64 sm:w-80 md:w-96 lg:w-md ${step.positionClass ?? ""}`}
-              style={{
-                top: step.position?.top,
-                bottom: step.position?.bottom,
-                left: step.position?.left,
-                right: step.position?.right,
-                transform: step.offsetY
-                  ? `translateY(${step.offsetY}px)`
-                  : undefined,
-              }}
+              className={`absolute w-64 sm:w-80 md:w-96 lg:w-md ${step.positionClass}`}
             >
-              <Reveal delay={i * 0.2}>
-                <div
-                  className={`flex items-center gap-3 sm:gap-4 lg:gap-6 ${
-                    step.side === "left" ? "flex-row-reverse" : "flex-row"
-                  }`}
-                >
-                  <motion.button
-                    type="button"
-                    onClick={() => setActiveStep(i)}
-                    whileHover={{ rotate: 1080 }}
-                    transition={{ duration: 1.1, ease: "easeInOut" }}
-                    className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full bg-prune/90 shadow-md sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-20 lg:w-20"
-                  >
-                    <span className="font-heading text-base text-paper sm:text-xl md:text-2xl lg:text-3xl">
-                      {i + 1}
-                    </span>
-                  </motion.button>
-                  <div
-                    className={
-                      step.side === "left" ? "text-right" : "text-left"
-                    }
-                  >
-                    <h3 className="text-sm font-bold text-encre sm:text-base md:text-lg lg:text-xl">
-                      {step.title}
-                    </h3>
-                    <p
-                      className={`hidden sm:block mt-1 w-48 text-xs leading-snug text-encre/80 sm:w-72 sm:text-sm md:w-86 md:text-base lg:w-108 lg:text-xl ${
-                        step.lines ? clampClasses[step.lines] : ""
-                      }`}
-                    >
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+              <Reveal delay={i * 0.1}>
+                <CardMap
+                  number={i + 1}
+                  title={step.title}
+                  description={step.description}
+                  icon={step.icon}
+                  side={step.side}
+                  lines={step.lines}
+                  onDiscover={() => setActiveStep(i)}
+                />
               </Reveal>
             </div>
           ))}
         </div>
       </div>
 
-      <CardMap
+      <CardMapModal
         isOpen={activeStep !== null}
         onClose={() => setActiveStep(null)}
         number={(activeStep ?? 0) + 1}
