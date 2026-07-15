@@ -147,7 +147,7 @@ export default function Process() {
               De la première rencontre à la mise en ligne, chaque étape est
               pensée pour donner vie à votre récit.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 mb-20 flex flex-wrap justify-center gap-4">
               <Button
                 content="Feuilleter le portfolio"
                 href="/portfolio"
