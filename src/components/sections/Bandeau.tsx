@@ -113,6 +113,15 @@ export default function Bandeau({
 
         <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
           <Reveal delay={0}>
+            <Image
+              src="/logo/logo-icone.svg"
+              alt=""
+              width={103}
+              height={84}
+              className="h-16 w-auto md:h-20"
+            />
+          </Reveal>
+          <Reveal delay={0.1}>
             <h2 className="text-4xl font-bold text-paper md:text-5xl">
               {title}
             </h2>
