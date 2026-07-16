@@ -96,7 +96,7 @@ export default function Hero({ quote, content }: HeroProps) {
 
           <Reveal delay={0.2}>
             <p className="max-w-xl font-quote text-xl italic text-prune md:text-2xl">
-              {quote}
+              "{quote}"
             </p>
           </Reveal>
 
@@ -129,7 +129,7 @@ export default function Hero({ quote, content }: HeroProps) {
 
         <motion.div
           style={{ x: birdX }}
-          className="pointer-events-none absolute left-[-33%] top-[22%] z-45 w-64 md:left-0 md:w-80"
+          className="pointer-events-none absolute left-[-35%] top-[22%] z-45 w-64 md:left-0 md:w-80"
         >
           <Image
             src="parallaxe/oiseau 1.svg"

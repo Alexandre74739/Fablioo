@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
 import FloatingBlob from "@/components/animations/FloatingBlob";
 import Reveal from "@/components/animations/Reveal";
 import AccordionItem from "@/components/ui/AccordionItem";
@@ -39,11 +41,37 @@ const faqs: { id: string; question: string; answer: string }[] = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function Faq() {
   const [openId, setOpenId] = useState<string | null>(null);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const ravenX = useTransform(scrollYProgress, [0, 1], [60, -120]);
+
   return (
-    <section className="relative overflow-hidden bg-paper">
+    <section ref={sectionRef} className="relative overflow-hidden bg-paper">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <FloatingBlob
         src="/shapes/blob-2.svg"
         className="-left-24 top-8 h-52 w-52 md:h-72 md:w-72"
@@ -53,7 +81,7 @@ export default function Faq() {
       />
       <FloatingBlob
         src="/shapes/blob-1.svg"
-        className="-right-20 top-1/3 h-56 w-72 md:h-72 md:w-96"
+        className="-right-20 top-64 h-56 w-72 md:h-72 md:w-96"
         duration={7.5}
         delay={0.6}
         yRange={-16}
@@ -61,12 +89,26 @@ export default function Faq() {
       />
       <FloatingBlob
         src="/shapes/blob-3.svg"
-        className="hidden sm:block -left-24 bottom-10 h-56 w-56 md:h-72 md:w-72"
+        className="hidden sm:block -left-24 top-108 h-56 w-56 md:h-72 md:w-72"
         duration={8.5}
         delay={1.2}
         yRange={14}
         rotateRange={5}
       />
+
+      <motion.div
+        style={{ x: ravenX }}
+        className="hidden lg:block pointer-events-none absolute z-0 -right-40 top-0 w-md xl:w-lg xl:-right-44"
+        aria-hidden="true"
+      >
+        <Image
+          src="/illustrations/raven.svg"
+          alt=""
+          width={430}
+          height={402}
+          className="h-auto w-full"
+        />
+      </motion.div>
 
       <div className="container relative z-10 mx-auto max-w-6xl px-4 py-16 md:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
