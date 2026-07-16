@@ -95,17 +95,13 @@ export default function Hero({ quote, content }: HeroProps) {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="max-w-xl font-quote text-xl italic text-prune md:text-2xl">
+            <h1 className="max-w-xl font-quote! text-xl italic text-prune md:text-2xl">
               "{quote}"
-            </p>
+            </h1>
           </Reveal>
 
           <Reveal delay={0.4}>
-            <Button
-              content={content}
-              href="/services"
-              style="primary"
-            />
+            <Button content={content} href="/services" style="primary" />
           </Reveal>
         </div>
 

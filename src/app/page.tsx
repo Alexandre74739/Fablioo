@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Products from "@/components/sections/Products";
@@ -5,18 +6,24 @@ import Process from "@/components/sections/Process";
 import Bandeau from "@/components/sections/Bandeau";
 import Faq from "@/components/sections/Faq";
 
+export const metadata: Metadata = {
+  title: "Fablioo | Création de site web design à Saint-Martin-d'Hères",
+  description:
+    "Design & sites web sur mesure, pensés comme un récit, du premier échange jusqu'à la mise en ligne.",
+};
+
 export default function Home() {
   return (
     <div>
       <main>
         <Hero
-          quote="Derrière chaque interface se cache un récit qu'on ne lit pas, mais qu'on ressent"
+          quote="Derrière chaque histoire il devrait y avoir un site internet qui la raconte"
           content="Découvrez nos services"
         />
         <About />
         <Products />
         <Process />
-        <Bandeau 
+        <Bandeau
           title="Un projet à réaliser ?"
           description="Dites-moi ce que vous avez en tête : je vous prépare une solution sur mesure, conçue pour vous simplifier la vie."
           label="Je passe à l'action "
