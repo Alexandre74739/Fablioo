@@ -4,8 +4,8 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { BookOpen, Quote } from "lucide-react";
-import Button from "../ui/Button";
-import Reveal from "../animations/Reveal";
+import Button from "@/components/ui/Button";
+import Reveal from "@/components/animations/Reveal";
 
 interface BandeauProps {
   title: string;
