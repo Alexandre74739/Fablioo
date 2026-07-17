@@ -5,6 +5,7 @@ type ButtonStyle =
   | "primary"
   | "secondary"
   | "tertiary"
+  | "outline"
   | "link-base"
   | "link-muted"
   | "nav";
@@ -40,6 +41,8 @@ export default function Button({
     secondary: "bg-paper text-prune hover:bg-rosewood hover:text-paper",
     tertiary:
       "bg-transparent text-paper border border-paper/40 hover:bg-paper/10",
+    outline:
+      "bg-paper text-rosewood border border-rosewood hover:bg-rosewood hover:text-paper",
     "link-base": "bg-transparent text-rosewood border-none hover:text-prune",
     "link-muted": "bg-transparent text-paper border-none hover:text-paper/80",
     nav: active ? "bg-prune text-paper" : "bg-sand/40 text-encre hover:bg-sand",

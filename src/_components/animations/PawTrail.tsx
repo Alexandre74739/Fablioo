@@ -145,9 +145,14 @@ const CYCLE = (pawGroups.length - 1) * STEP + PAW_DURATION + PAUSE;
 interface PawTrailProps {
   className?: string;
   rotate?: number;
+  color?: string;
 }
 
-export default function PawTrail({ className, rotate }: PawTrailProps) {
+export default function PawTrail({
+  className,
+  rotate,
+  color = "#9e5252",
+}: PawTrailProps) {
   return (
     <svg
       viewBox="0 0 218 547"
@@ -171,7 +176,7 @@ export default function PawTrail({ className, rotate }: PawTrailProps) {
           }}
         >
           {paths.map((d, pathIndex) => (
-            <path key={pathIndex} d={d} fill="#9e5252" />
+            <path key={pathIndex} d={d} fill={color} />
           ))}
         </motion.g>
       ))}
