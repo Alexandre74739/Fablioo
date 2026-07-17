@@ -84,7 +84,7 @@ export default function Products() {
                 title="Logo et identité graphique"
                 description="Une identité pensée pour vous, clair, cohérente et mémorable qui pose les bases de votre univers."
                 button="Je veux un super design"
-                href="tarifs"
+                href="services"
               />
             </Reveal>
             <Reveal delay={0.4}>
@@ -95,7 +95,7 @@ export default function Products() {
                 title="Site web pensée pour vous"
                 description="Un site fluide et élégant, conçu pour raconter votre histoire, séduire vos visiteurs et faire grandir votre activité."
                 button="Je veux mon site web"
-                href="tarifs"
+                href="services"
               />
             </Reveal>
             <Reveal
@@ -109,7 +109,7 @@ export default function Products() {
                 title="Maintenance et sécurité"
                 description="Mises à jour, surveillance et assistance continue pour un site fiable, rapide et protégé au fil du temps."
                 button="Je veux être tranquille"
-                href="tarifs"
+                href="services"
               />
             </Reveal>
           </div>
