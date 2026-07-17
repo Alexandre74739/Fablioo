@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import Button from "@/components/ui/Button";
-import Reveal from "@/components/animations/Reveal";
+import Button from "@/_components/ui/Button";
+import Reveal from "@/_components/animations/Reveal";
 import { useHeroParallax } from "@/hooks/useHeroParallax";
 
 interface HeroProps {

@@ -3,9 +3,9 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import FloatingBlob from "@/components/animations/FloatingBlob";
-import Reveal from "@/components/animations/Reveal";
-import AccordionItem from "@/components/ui/AccordionItem";
+import FloatingBlob from "@/_components/animations/FloatingBlob";
+import Reveal from "@/_components/animations/Reveal";
+import AccordionItem from "@/_components/ui/AccordionItem";
 
 const faqs: { id: string; question: string; answer: string }[] = [
   {

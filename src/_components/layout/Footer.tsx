@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
-import Button from "@/components/ui/Button";
+import Button from "@/_components/ui/Button";
 
 // Valeur JS (px) équivalente aux breakpoints Tailwind, recalculée au resize car useTransform ne peut pas lire des classes responsive.
 function getGrassMaxTranslate(width: number) {

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Button from "@/components/ui/Button";
-import Reveal from "@/components/animations/Reveal";
-import PawTrail from "@/components/animations/PawTrail";
-import FloatingBlob from "@/components/animations/FloatingBlob";
+import Button from "@/_components/ui/Button";
+import Reveal from "@/_components/animations/Reveal";
+import PawTrail from "@/_components/animations/PawTrail";
+import FloatingBlob from "@/_components/animations/FloatingBlob";
 
 export const metadata: Metadata = {
   title: "404 – Page introuvable",

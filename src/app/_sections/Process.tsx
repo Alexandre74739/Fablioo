@@ -10,12 +10,12 @@ import {
   SlidersHorizontal,
   type LucideIcon,
 } from "lucide-react";
-import FloatingBlob from "@/components/animations/FloatingBlob";
-import PawTrail from "@/components/animations/PawTrail";
-import Reveal from "@/components/animations/Reveal";
-import Button from "@/components/ui/Button";
-import CardMap, { type Lines } from "@/components/ui/cards/CardMap";
-import CardMapModal from "@/components/ui/modals/CardMap";
+import FloatingBlob from "@/_components/animations/FloatingBlob";
+import PawTrail from "@/_components/animations/PawTrail";
+import Reveal from "@/_components/animations/Reveal";
+import Button from "@/_components/ui/Button";
+import CardMap, { type Lines } from "@/_components/ui/cards/CardMap";
+import CardMapModal from "@/_components/ui/modals/CardMap";
 
 const steps: {
   title: string;

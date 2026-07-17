@@ -3,10 +3,10 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import FloatingBlob from "@/components/animations/FloatingBlob";
-import Reveal from "@/components/animations/Reveal";
-import PawTrail from "@/components/animations/PawTrail";
-import Card from "@/components/ui/cards/Card";
+import FloatingBlob from "@/_components/animations/FloatingBlob";
+import Reveal from "@/_components/animations/Reveal";
+import PawTrail from "@/_components/animations/PawTrail";
+import Card from "@/_components/ui/cards/Card";
 
 export default function Products() {
   const waveRef = useRef<HTMLDivElement>(null);

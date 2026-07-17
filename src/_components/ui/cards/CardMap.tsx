@@ -1,7 +1,7 @@
 "use client";
 
 import { type LucideIcon } from "lucide-react";
-import Button from "@/components/ui/Button";
+import Button from "@/_components/ui/Button";
 
 export type Lines = 2 | 3 | 4;
 

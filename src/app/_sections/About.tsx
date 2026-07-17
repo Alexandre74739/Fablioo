@@ -4,9 +4,9 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { BookOpen, Quote } from "lucide-react";
-import Reveal from "@/components/animations/Reveal";
-import Button from "@/components/ui/Button";
-import SkillsCascade from "@/components/ui/SkillsCascade";
+import Reveal from "@/_components/animations/Reveal";
+import Button from "@/_components/ui/Button";
+import SkillsCascade from "@/_components/ui/SkillsCascade";
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);

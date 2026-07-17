@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Hero from "@/app/sections/Hero";
-import About from "@/app/sections/About";
-import Products from "@/app/sections/Products";
-import Process from "@/app/sections/Process";
-import Bandeau from "@/app/sections/Bandeau";
-import Faq from "@/app/sections/Faq";
+import Hero from "@/app/_sections/Hero";
+import About from "@/app/_sections/About";
+import Products from "@/app/_sections/Products";
+import Process from "@/app/_sections/Process";
+import Bandeau from "@/app/_sections/Bandeau";
+import Faq from "@/app/_sections/Faq";
 
 export const metadata: Metadata = {
   title: "Fablioo | Création de site web design à Saint-Martin-d'Hères",

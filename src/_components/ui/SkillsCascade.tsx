@@ -1,6 +1,6 @@
 "use client";
 
-import Pill from "@/components/animations/Pill";
+import Pill from "@/_components/animations/Pill";
 
 const skillRows: { label: string; color: string; rotate: number }[][] = [
   [

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
+import Button from "@/_components/ui/Button";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
