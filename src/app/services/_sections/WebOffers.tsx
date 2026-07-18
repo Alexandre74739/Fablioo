@@ -79,7 +79,7 @@ export default function WebOffers() {
             <Reveal delay={0.2}>
               <PricingCard
                 title="Première Trace"
-                badge="En ligne rapidement"
+                badge="Site Wordpress"
                 price="500€"
                 note="Base de 4 pages + 50€ / page supplémentaire"
                 features={[
@@ -97,7 +97,7 @@ export default function WebOffers() {
             <Reveal delay={0.4}>
               <PricingCard
                 title="Chemin Tracé"
-                badge="Se démarquer en ligne"
+                badge="Site custom Next.js"
                 price="800€"
                 features={[
                   "Site custom Next.js",
@@ -113,7 +113,7 @@ export default function WebOffers() {
             <Reveal delay={0.4}>
               <PricingCard
                 title="Traces de Meute"
-                badge="Autonomie totale"
+                badge="Site Next.js + CMS"
                 price="1 000€"
                 features={[
                   "Tout Chemin Tracé",
@@ -130,8 +130,8 @@ export default function WebOffers() {
             <Reveal delay={0.6}>
               <PricingCard
                 title="Grande Meute"
-                badge="Prêt à évoluer"
-                price="1 200€"
+                badge="Projet sur mesure"
+                price="1 500€"
                 features={[
                   "Tout Traces de Meute",
                   "Une fonctionnalité avancée au choix : espace membres, inscriptions en ligne, paiement, réservation...",
