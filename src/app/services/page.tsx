@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Hero from "@/app/services/_sections/Hero";
 import WebOffers from "@/app/services/_sections/WebOffers";
 import DesignOffers from "@/app/services/_sections/DesignOffers";
+import MaintenanceOffers from "@/app/services/_sections/MaintenanceOffers";
 
 export const metadata: Metadata = {
   title: "Services | Sites web & identité visuelle sur mesure",
@@ -22,6 +23,7 @@ export default function Services() {
         />
         <WebOffers />
         <DesignOffers />
+        <MaintenanceOffers />
       </main>
     </div>
   );

@@ -28,7 +28,9 @@ export default function PricingCard({
   return (
     <div
       className={`relative rounded-3xl bg-paper shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${
-        featured ? "border-2 border-rosewood" : "border border-encre/10"
+        featured
+          ? "border-2 border-dashed border-rosewood"
+          : "border border-encre/10"
       }`}
     >
       {featured && (

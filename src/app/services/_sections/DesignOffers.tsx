@@ -77,7 +77,7 @@ export default function DesignOffers() {
             <div className="mt-14 flex flex-col gap-6">
               <Reveal delay={0.2}>
                 <PricingCard
-                  title="Réecriture visuelle"
+                  title="Réecriture Visuelle"
                   badge="Maquettes UX/UI"
                   price="350€"
                   note="Base de 4 pages + 50€ / page supplémentaire"
@@ -93,7 +93,7 @@ export default function DesignOffers() {
 
               <Reveal delay={0.4}>
                 <PricingCard
-                  title="Signature design"
+                  title="Signature Design"
                   badge="Identité graphique"
                   price="450€"
                   features={[
@@ -110,7 +110,7 @@ export default function DesignOffers() {
 
               <Reveal delay={0.6}>
                 <PricingCard
-                  title="Nouveau chapitre"
+                  title="Nouveau Chapitre"
                   badge="Maquettes + Identité"
                   price="Sur devis"
                   pricePrefix=""
