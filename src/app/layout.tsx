@@ -22,6 +22,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://fablioo.com"),
   title: "Fablioo",
   description:
     "Derrière chaque interface se cache un récit qu'on ne lit pas, mais qu'on ressent.",
