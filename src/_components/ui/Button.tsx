@@ -24,6 +24,8 @@ interface ButtonProps {
   size?: ButtonSize;
   active?: boolean;
   onClick?: () => void;
+  type?: "button" | "submit";
+  disabled?: boolean;
 }
 
 export default function Button({
@@ -33,8 +35,10 @@ export default function Button({
   size = "large",
   active,
   onClick,
+  type = "button",
+  disabled = false,
 }: ButtonProps) {
-  const baseStyles = `group inline-block font-heading transition-ease duration-300 text-center cursor-pointer ${sizeStyles[size]}`;
+  const baseStyles = `group inline-block font-heading transition-ease duration-300 text-center cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 ${sizeStyles[size]}`;
 
   const styles: Record<ButtonStyle, string> = {
     primary: "bg-rosewood text-paper hover:bg-prune",
@@ -63,9 +67,14 @@ export default function Button({
       content
     );
 
-  if (onClick) {
+  if (type === "submit" || onClick) {
     return (
-      <button onClick={onClick} className={`${baseStyles} ${variantStyles}`}>
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        className={`${baseStyles} ${variantStyles}`}
+      >
         {label}
       </button>
     );
