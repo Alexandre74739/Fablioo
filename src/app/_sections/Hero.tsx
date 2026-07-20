@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import Button from "@/_components/ui/Button";
 import Reveal from "@/_components/animations/Reveal";
+import ChromaKeyVideo from "@/_components/animations/ChromaKeyVideo";
 import { useHeroParallax } from "@/hooks/useHeroParallax";
 
 interface HeroProps {
@@ -135,6 +136,13 @@ export default function Hero({ quote, content }: HeroProps) {
             className="h-auto w-full"
           />
         </motion.div>
+
+        <div className="pointer-events-none absolute inset-0 z-20">
+          <ChromaKeyVideo
+            src="/videos/butterfly.mp4"
+            className="h-full w-full object-cover"
+          />
+        </div>
       </div>
     </section>
   );
