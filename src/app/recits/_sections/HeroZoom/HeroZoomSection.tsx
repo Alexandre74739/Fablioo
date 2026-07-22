@@ -54,7 +54,7 @@ export default function HeroZoomSection({
     target: branchesRef,
     offset: ["start end", "end start"],
   });
-  const branchesMaxTranslate = 40;
+  const branchesMaxTranslate = isMobile ? 16 : 64;
   const branchesY = useTransform(
     branchesProgress,
     [0, 1],
