@@ -1,4 +1,4 @@
-import HeroZoom from "@/app/recits/_sections/HeroZoom";
+import HeroZoom from "@/app/recits/_sections/HeroZoom/HeroZoomSection";
 
 export default function Recits() {
   return (
