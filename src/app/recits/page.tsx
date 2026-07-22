@@ -33,6 +33,10 @@ export default function Recits() {
           }
           illustrationPosition="right"
           hideIllustrationOnMobile
+          button={{
+            content: "Feuilleter le portfolio",
+            href: "/portfolio",
+          }}
         />
       </main>
     </div>

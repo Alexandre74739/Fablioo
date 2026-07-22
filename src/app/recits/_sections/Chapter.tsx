@@ -1,5 +1,11 @@
 import type { ReactNode } from "react";
 import Reveal from "@/_components/animations/Reveal";
+import Button from "@/_components/ui/Button";
+interface ChapterButtonProps {
+  content: string;
+  href?: string;
+  onClick?: () => void;
+}
 
 interface ChapterProps {
   number: string;
@@ -8,6 +14,7 @@ interface ChapterProps {
   illustration: ReactNode;
   illustrationPosition?: "left" | "right";
   hideIllustrationOnMobile?: boolean;
+  button?: ChapterButtonProps;
 }
 
 export default function Chapter({
@@ -17,11 +24,12 @@ export default function Chapter({
   illustration,
   illustrationPosition = "right",
   hideIllustrationOnMobile = false,
+  button,
 }: ChapterProps) {
   const isRight = illustrationPosition === "right";
 
   return (
-    <section className="relative -z-100 flex min-h-screen w-full items-center overflow-hidden bg-paper px-6 py-16 md:px-16">
+    <section className="relative -z-10 flex min-h-[80vh] w-full items-center overflow-hidden bg-paper px-6 py-16 md:px-16">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 md:grid-cols-2">
         <Reveal
           delay={0}
@@ -48,6 +56,15 @@ export default function Chapter({
                 <p key={i}>{paragraph}</p>
               ))}
             </Reveal>
+            {button && (
+              <Reveal delay={0.4} className="mt-8">
+                <Button
+                  content={button.content}
+                  href={button.href}
+                  onClick={button.onClick}
+                />
+              </Reveal>
+            )}
           </div>
         </Reveal>
 
