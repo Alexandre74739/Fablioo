@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { useScroll, useTransform } from "motion/react";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
 import Background from "./Background";
 import ZoomCard from "./ZoomCard";
 import HeroCard from "./HeroCard";
@@ -48,30 +49,65 @@ export default function HeroZoomSection({
   const labelProgress = useTransform(scrollYProgress, [0.42, 0.58], [0, 1]);
   const signatureProgress = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
 
+  const branchesRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: branchesProgress } = useScroll({
+    target: branchesRef,
+    offset: ["start end", "end start"],
+  });
+  const branchesMaxTranslate = 40;
+  const branchesY = useTransform(
+    branchesProgress,
+    [0, 1],
+    [branchesMaxTranslate, -branchesMaxTranslate],
+  );
+
   return (
-    <section ref={sectionRef} className="relative h-[280vh] w-full bg-prune">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <Background quote1={quote1} quote2={quote2} />
+    <>
+      <section ref={sectionRef} className="relative h-[280vh] w-full bg-prune">
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
+          <Background quote1={quote1} quote2={quote2} />
 
-        <div className="absolute inset-0 z-20">
-          <ZoomLabel
-            scaleY={scaleY}
-            labelProgress={labelProgress}
-            isMobile={isMobile}
-          />
-
-          <ZoomCard scaleX={scaleX} scaleY={scaleY} cardY={cardY}>
-            <HeroCard
-              radius={radius}
-              fadeProgress={fadeProgress}
-              title={title}
-              highlight={highlight}
-              content={content}
+          <div className="absolute inset-0 z-20">
+            <ZoomLabel
+              scaleY={scaleY}
+              labelProgress={labelProgress}
+              isMobile={isMobile}
             />
-            <SignatureDraw progress={signatureProgress} />
-          </ZoomCard>
+
+            <ZoomCard scaleX={scaleX} scaleY={scaleY} cardY={cardY}>
+              <HeroCard
+                radius={radius}
+                fadeProgress={fadeProgress}
+                title={title}
+                highlight={highlight}
+                content={content}
+              />
+              <SignatureDraw progress={signatureProgress} />
+            </ZoomCard>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <motion.div
+        ref={branchesRef}
+        style={{ y: branchesY }}
+        className="relative -mb-8 aspect-1516/111 w-full md:-mb-6"
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-x-0 bg-prune"
+          style={{
+            bottom: "calc(100% - 2px)",
+            height: branchesMaxTranslate + 2,
+          }}
+        />
+        <Image
+          src="/parallaxe/Branches.svg"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </motion.div>
+    </>
   );
 }
