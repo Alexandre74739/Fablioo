@@ -61,7 +61,7 @@ export default function ChromaKeyVideo({
       }
     };
 
-    video.playbackRate = 0.8;
+    video.playbackRate = 1;
     video.play().catch(() => {});
     frameId = requestAnimationFrame(draw);
 
