@@ -140,19 +140,26 @@ const pawGroups: string[][] = [
 const STEP = 0.5;
 const PAW_DURATION = 2;
 const PAUSE = 1.5;
-const CYCLE = (pawGroups.length - 1) * STEP + PAW_DURATION + PAUSE;
 
 interface PawTrailProps {
   className?: string;
   rotate?: number;
   color?: string;
+  step?: number;
+  pawDuration?: number;
+  pause?: number;
 }
 
 export default function PawTrail({
   className,
   rotate,
   color = "#9e5252",
+  step = STEP,
+  pawDuration = PAW_DURATION,
+  pause = PAUSE,
 }: PawTrailProps) {
+  const cycle = (pawGroups.length - 1) * step + pawDuration + pause;
+
   return (
     <svg
       viewBox="0 0 218 547"
@@ -167,11 +174,11 @@ export default function PawTrail({
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 1, 0] }}
           transition={{
-            duration: PAW_DURATION,
+            duration: pawDuration,
             times: [0, 0.25, 0.75, 1],
-            delay: index * STEP,
+            delay: index * step,
             repeat: Infinity,
-            repeatDelay: CYCLE - PAW_DURATION,
+            repeatDelay: cycle - pawDuration,
             ease: "easeInOut",
           }}
         >
