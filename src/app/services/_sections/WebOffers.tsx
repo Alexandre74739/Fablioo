@@ -22,7 +22,7 @@ export default function WebOffers() {
   );
 
   return (
-    <section className="relative z-10">
+    <section id="site-web" className="relative z-10">
       <div className="relative overflow-hidden bg-prune px-4 pt-16 pb-16 md:px-8 md:pt-24 md:pb-24">
         <FloatingBlob
           src="/shapes/blob-1.svg"

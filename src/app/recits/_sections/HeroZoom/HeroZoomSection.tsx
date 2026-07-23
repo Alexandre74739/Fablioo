@@ -91,14 +91,14 @@ export default function HeroZoomSection({
       <motion.div
         ref={branchesRef}
         style={{ y: branchesY }}
-        className="relative -mb-8 aspect-1516/111 w-full md:-mb-6"
+        className="relative z-10 -mb-8 aspect-1516/111 w-full md:-mb-6"
         aria-hidden="true"
       >
         <div
           className="absolute inset-x-0 bg-prune"
           style={{
             bottom: "calc(100% - 2px)",
-            height: branchesMaxTranslate + 2,
+            height: branchesMaxTranslate + 20,
           }}
         />
         <Image

@@ -27,7 +27,7 @@ export default function DesignOffers() {
         style={{ height: 150, marginTop: -150 }}
         aria-hidden="true"
       />
-      <section className="relative overflow-hidden bg-sand/20">
+      <section id="design" className="relative overflow-hidden bg-sand/20">
         <div className="relative">
           <FloatingBlob
             src="/shapes/blob-1.svg"

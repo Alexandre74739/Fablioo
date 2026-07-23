@@ -60,7 +60,7 @@ export default function ZoomLabel({
             }}
             style={{ display: "inline-block", opacity: 0 }}
           >
-            {char === " " ? " " : char}
+            {char === " " ? " " : char}
           </span>
         ))}
       </p>
