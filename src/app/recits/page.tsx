@@ -9,9 +9,9 @@ import ChaptersScroller, {
 } from "@/app/recits/_sections/ChaptersScroller";
 
 export const metadata: Metadata = {
-  title: "Le récit derrière l'histoire de Fablioo",
+  title: "Récits | L'histoire derrière Fablioo",
   description:
-    "De l'idée de départ à la mise en ligne : découvrez, chapitre après chapitre, les coulisses de Fablioo et la manière dont chaque projet est accompagné.",
+    "Découvrez l'histoire de Fablioo racontée chapitre après chapitre : les inspirations, les coulisses et les valeurs qui façonnent chaque projet, du design au développement.",
   alternates: {
     canonical: "/recits",
   },
