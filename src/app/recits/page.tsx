@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import HeroZoom from "@/app/recits/_sections/HeroZoom/HeroZoomSection";
 import Prologue from "@/app/recits/_sections/Prologue";
+import Epilogue from "@/app/recits/_sections/Epilogue";
 import Chapter from "@/app/recits/_sections/Chapter";
 import ChapterNav from "@/_components/ui/ChapterNav";
 import ChaptersScroller, {
   CHAPTERS_SCROLLER_ID,
 } from "@/app/recits/_sections/ChaptersScroller";
+import Bandeau from "../_sections/Bandeau";
 
 export const metadata: Metadata = {
   title: "Récits | L'histoire derrière Fablioo",
@@ -125,7 +127,7 @@ export default function Recits() {
             number="III"
             title="Pourquoi le corbeau et le renard ?"
             paragraphs={[
-              "Fablioo vient du mot « fable », dont le corbeau de La Fontaine est l'emblème. C'est celui qui porte une voix, un message, et qui nous accompagne du logo jusqu'au moindre détail du site aaccompagné d'un renard n'étant jamais bien loin, glissé dans les illustrations et traces de pas, clin d'œil pour qui connaît la fable. Cette envie de bien raconter se retrouve aussi dans la palette : des teintes intemporelles plutôt qu'une tendance passagère, pensées pour durer comme chaque projet que j'accompagne.",
+              "Fablioo vient du mot « fable », dont le corbeau de La Fontaine est l'emblème. C'est celui qui porte une voix, un message, et qui nous accompagne du logo jusqu'au moindre détail du site accompagné d'un renard n'étant jamais bien loin, glissé dans les illustrations et traces de pas, clin d'œil pour qui connaît la fable. Cette envie de bien raconter se retrouve aussi dans la palette : des teintes intemporelles plutôt qu'une tendance passagère, pensées pour durer comme chaque projet que j'accompagne.",
             ]}
             illustration={
               <div className="flex items-end justify-center gap-4">
@@ -194,6 +196,14 @@ export default function Recits() {
             }}
           />
         </ChaptersScroller>
+        <Bandeau
+          title="Un projet à réaliser ?"
+          description="Dites-moi ce que vous avez en tête : je vous prépare une solution sur mesure, conçue pour vous simplifier la vie."
+          label="Je passe à l'action "
+          href="/contact"
+        />
+
+        <Epilogue />
       </main>
     </div>
   );
