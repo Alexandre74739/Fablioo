@@ -90,7 +90,7 @@ export default function Hero({
           />
         </div>
 
-        <div className="absolute -mt-8 inset-0 z-35 flex flex-col items-center justify-center gap-6 px-6 text-center">
+        <div className="absolute -mt-8 inset-0 z-25 flex flex-col items-center justify-center gap-6 px-6 text-center">
           <Reveal delay={0}>
             <h1 className="max-w-4xl sm:max-w-lg md:max-w-4xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               {title}{" "}
