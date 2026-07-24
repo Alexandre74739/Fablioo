@@ -42,9 +42,12 @@ export default function ChapterNav({ items, scrollerId }: ChapterNavProps) {
     if (!scroller) return;
     scrollerRef.current = scroller;
 
+    // The scroller now spans several screens of height (one per chapter), so
+    // a ratio-based threshold would need most of it on screen at once to
+    // fire — which never happens. Any visible pixel is enough to show the nav.
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.4 },
+      { threshold: 0 },
     );
 
     observer.observe(scroller);
@@ -58,8 +61,12 @@ export default function ChapterNav({ items, scrollerId }: ChapterNavProps) {
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
-    scroller.scrollTo({
-      left: index * scroller.clientWidth,
+    // Chapter N is shown exactly N screens into the scroller's own scroll
+    // range (see ChaptersScroller's scrollYProgress mapping), regardless of
+    // how many chapters it holds — so this is just a vertical jump.
+    const sectionTop = scroller.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: sectionTop + index * window.innerHeight,
       behavior: "smooth",
     });
   };

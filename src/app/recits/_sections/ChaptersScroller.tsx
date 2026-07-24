@@ -1,19 +1,36 @@
 "use client";
 
-import { Children, useEffect, useRef, type ReactNode } from "react";
+import { Children, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  motion,
+  motionValue,
+  useMotionValue,
+  animate,
+  type MotionValue,
+} from "motion/react";
 import Reveal from "@/_components/animations/Reveal";
 
 export const CHAPTERS_SCROLLER_ID = "chapters-scroller";
 
+// A single hand-picked easing/duration drives every transition, instead of
+// however fast the browser's native smooth-scroll happens to animate — that
+// mismatch (visual reactively following an independently-timed native
+// scroll) is what made transitions feel abrupt.
+const TRANSITION = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const };
+
 interface ChapterSlideProps {
+  opacity: MotionValue<number>;
   children: ReactNode;
 }
 
-function ChapterSlide({ children }: ChapterSlideProps) {
+function ChapterSlide({ opacity, children }: ChapterSlideProps) {
   return (
-    <div className="flex h-dvh w-screen shrink-0 snap-start items-center justify-center overflow-hidden">
+    <motion.div
+      style={{ opacity }}
+      className="flex h-dvh w-screen shrink-0 items-center justify-center overflow-hidden"
+    >
       <Reveal className="h-full w-full">{children}</Reveal>
-    </div>
+    </motion.div>
   );
 }
 
@@ -22,82 +39,157 @@ interface ChaptersScrollerProps {
 }
 
 export default function ChaptersScroller({ children }: ChaptersScrollerProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const lockedRef = useRef(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const count = Children.count(children);
+
+  const x = useMotionValue(0);
+  // One value per chapter, created once outside the render loop (hooks can't
+  // run inside .map) — chapter 0 starts the only one visible.
+  const [opacities] = useState<MotionValue<number>[]>(() =>
+    Array.from({ length: count }, (_, i) => motionValue(i === 0 ? 1 : 0)),
+  );
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    // Only trap the scroll once the section fills the whole viewport (100vh) —
-    // this both avoids stealing the scroll mid-transition and gives a clean
-    // unlock: reaching an edge and continuing releases the trap immediately.
-    const visibilityObserver = new IntersectionObserver(
-      ([entry]) => {
-        lockedRef.current = entry.intersectionRatio >= 0.99;
-      },
-      { threshold: 0.99 },
-    );
-    visibilityObserver.observe(el);
+    const currentIndexRef = { current: 0 };
+    const isSyncingScrollRef = { current: false };
+    // A single scroll/trackpad gesture fires many wheel events in a row —
+    // without this, each one advanced the chapter independently, so one
+    // strong flick could blow straight through several chapters at once.
+    const isCoolingDownRef = { current: false };
 
-    // At an edge, continuing to scroll in the outgoing direction releases
-    // the trap instead of blocking it, so the page can scroll past the section.
-    const releasesTrap = (delta: number) => {
-      const atStart = el.scrollLeft <= 0;
-      const atEnd = el.scrollLeft >= el.scrollWidth - el.clientWidth - 1;
-      return (delta < 0 && atStart) || (delta > 0 && atEnd);
+    const isSectionActive = () => {
+      const rect = section.getBoundingClientRect();
+      return rect.top <= 1 && rect.bottom >= window.innerHeight - 1;
+    };
+
+    const getScrollIndex = () => {
+      const rect = section.getBoundingClientRect();
+      const raw = -rect.top / window.innerHeight;
+      return Math.min(count - 1, Math.max(0, Math.round(raw)));
+    };
+
+    // `opacities`/`x` and `currentIndexRef` default to chapter 0 regardless
+    // of where the page actually loads — the browser can restore scroll
+    // position on reload, landing anywhere in or past the section. Sync
+    // once, instantly (no animation), so the visuals match reality before
+    // any gesture fires and "corrects" it with a jarring jump.
+    const initialIndex = getScrollIndex();
+    currentIndexRef.current = initialIndex;
+    x.set(-initialIndex * window.innerWidth);
+    opacities.forEach((opacity, i) => opacity.set(i === initialIndex ? 1 : 0));
+
+    // Animates the visuals to `index`. `syncScroll` additionally jumps the
+    // real scroll position there (for wheel/touch, which never move it
+    // natively since the event gets prevented) — as an instant jump, not an
+    // animated one, so it doesn't race or compound with the animation above.
+    const goToChapter = (index: number, syncScroll: boolean) => {
+      currentIndexRef.current = index;
+      animate(x, -index * window.innerWidth, TRANSITION);
+      opacities.forEach((opacity, i) => {
+        animate(opacity, i === index ? 1 : 0, TRANSITION);
+      });
+
+      if (syncScroll) {
+        isCoolingDownRef.current = true;
+        window.setTimeout(() => {
+          isCoolingDownRef.current = false;
+        }, TRANSITION.duration * 1000);
+
+        const rect = section.getBoundingClientRect();
+        const sectionTop = window.scrollY + rect.top;
+        isSyncingScrollRef.current = true;
+        window.scrollTo({ top: sectionTop + index * window.innerHeight });
+        requestAnimationFrame(() => {
+          isSyncingScrollRef.current = false;
+        });
+      }
+    };
+
+    // Returns true if the gesture should stay trapped in the section (the
+    // caller must then block the native scroll); false at an edge, letting
+    // the page scroll on to whatever comes before/after the chapters.
+    const handleDirection = (direction: 1 | -1) => {
+      const index = currentIndexRef.current;
+      const atFirst = index <= 0;
+      const atLast = index >= count - 1;
+      if ((direction < 0 && atFirst) || (direction > 0 && atLast)) return false;
+
+      // Still swallow the event during the cooldown — otherwise the same
+      // gesture leaks into a native scroll once we stop calling goToChapter.
+      if (!isCoolingDownRef.current) goToChapter(index + direction, true);
+      return true;
     };
 
     const onWheel = (e: WheelEvent) => {
-      if (!lockedRef.current) return;
+      if (!isSectionActive()) return;
       if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-      if (releasesTrap(e.deltaY)) return;
 
-      e.preventDefault();
-      el.scrollBy({ left: e.deltaY });
+      const direction = e.deltaY > 0 ? 1 : -1;
+      if (handleDirection(direction)) e.preventDefault();
     };
 
-    let touchStartX = 0;
     let touchStartY = 0;
 
     const onTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      if (!lockedRef.current) return;
+      if (!isSectionActive()) return;
 
-      const touch = e.touches[0];
-      const deltaX = touchStartX - touch.clientX;
-      const deltaY = touchStartY - touch.clientY;
-      if (Math.abs(deltaY) <= Math.abs(deltaX)) return;
-      if (releasesTrap(deltaY)) return;
+      const deltaY = touchStartY - e.touches[0].clientY;
+      if (Math.abs(deltaY) < 40) return;
 
-      e.preventDefault();
+      const direction = deltaY > 0 ? 1 : -1;
+      if (handleDirection(direction)) {
+        e.preventDefault();
+        touchStartY = e.touches[0].clientY;
+      }
     };
 
-    el.addEventListener("wheel", onWheel, { passive: false });
-    el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    // A scrollbar drag isn't a wheel/touch event and can't be intercepted —
+    // it moves the real scroll position directly. Instead of fighting it,
+    // just follow: once it crosses into a different chapter's territory,
+    // animate the visuals to match (scroll itself needs no syncing, it's
+    // already there).
+    const onScroll = () => {
+      if (isSyncingScrollRef.current) return;
+      if (!isSectionActive()) return;
+
+      const index = getScrollIndex();
+      if (index !== currentIndexRef.current) goToChapter(index, false);
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      visibilityObserver.disconnect();
-      el.removeEventListener("wheel", onWheel);
-      el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [count, x, opacities]);
 
   return (
-    <div
+    <section
       id={CHAPTERS_SCROLLER_ID}
-      ref={containerRef}
-      className="no-scrollbar flex h-dvh w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden scroll-smooth"
+      ref={sectionRef}
+      className="relative"
+      style={{ height: `${count * 100}dvh` }}
     >
-      {Children.map(children, (child) => (
-        <ChapterSlide>{child}</ChapterSlide>
-      ))}
-    </div>
+      <div className="sticky top-0 h-dvh w-full overflow-hidden">
+        <motion.div className="flex h-full" style={{ x }}>
+          {Children.map(children, (child, i) => (
+            <ChapterSlide opacity={opacities[i]}>{child}</ChapterSlide>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 }
