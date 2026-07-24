@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "@/_components/animations/Reveal";
 import FloatingBlob from "@/_components/animations/FloatingBlob";
-import PawTrail from "@/_components/animations/PawTrail";
 import Button from "@/_components/ui/Button";
 
 const SIGNATURE_PATH =
@@ -32,8 +33,44 @@ function SignatureDraw({ className }: { className?: string }) {
 }
 
 export default function Epilogue() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const ravenX = useTransform(scrollYProgress, [0, 1], [50, -90]);
+  const foxX = useTransform(scrollYProgress, [0, 1], [-90, 50]);
+
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-paper px-6 py-24">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-paper px-6 py-24"
+    >
+      <motion.div
+        style={{ x: ravenX }}
+        className="hidden md:block pointer-events-none absolute z-0 -right-20 top-6 h-64 w-64 lg:-right-32 lg:top-10 lg:h-88 lg:w-88"
+        aria-hidden="true"
+      >
+        <Image
+          src="/illustrations/raven.svg"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </motion.div>
+      <motion.div
+        style={{ x: foxX }}
+        className="hidden md:block pointer-events-none absolute z-0 -left-20 bottom-6 h-64 w-64 lg:-left-32 lg:bottom-10 lg:h-88 lg:w-88"
+        aria-hidden="true"
+      >
+        <Image
+          src="/illustrations/fox.svg"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </motion.div>
+
       <FloatingBlob
         src="/shapes/blob-1.svg"
         className="-left-24 top-16 h-44 w-64 md:h-56 md:w-80"
@@ -51,19 +88,12 @@ export default function Epilogue() {
       />
       <FloatingBlob
         src="/shapes/blob-3.svg"
-        className="-left-16 bottom-8 h-52 w-52 md:h-64 md:w-64"
+        className="md:hidden -left-16 bottom-8 h-52 w-52"
         duration={7}
         delay={0.5}
         yRange={14}
         rotateRange={5}
       />
-
-      <div className="pointer-events-none absolute -left-10 top-1/2 hidden h-140 w-56 -translate-y-1/2 -rotate-6 opacity-60 md:block">
-        <PawTrail className="h-full w-full" />
-      </div>
-      <div className="pointer-events-none absolute -right-10 top-1/2 hidden h-140 w-56 -translate-y-1/2 rotate-174 opacity-60 md:block">
-        <PawTrail className="h-full w-full" />
-      </div>
 
       <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-8 text-center">
         <Reveal delay={0}>
@@ -84,7 +114,7 @@ export default function Epilogue() {
             <p className="max-w-lg font-quote text-lg italic text-prune md:text-xl">
               Une histoire ne s'arrête jamais vraiment au mot « fin ».
             </p>
-            <p className="max-w-md text-base leading-relaxed text-encre/70 md:text-lg">
+            <p className="max-w-md text-base leading-relaxed text-encre/80 md:text-lg">
               Elle attend simplement que quelqu'un tourne la page suivante.
               Peut-être la vôtre ?
             </p>
@@ -108,6 +138,9 @@ export default function Epilogue() {
 
         <Reveal delay={0.6} className="flex flex-col items-center gap-2">
           <SignatureDraw className="h-12 w-auto text-rosewood md:h-16" />
+          <span className="font-quote text-sm italic text-encre/60 md:text-base">
+            Merci d'avoir tout lu
+          </span>
           <span className="text-sm font-bold tracking-wide text-prune md:text-base">
             Alexandre, fondateur de Fablioo
           </span>
