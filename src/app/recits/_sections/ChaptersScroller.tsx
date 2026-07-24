@@ -11,7 +11,7 @@ interface ChapterSlideProps {
 
 function ChapterSlide({ children }: ChapterSlideProps) {
   return (
-    <div className="flex h-dvh w-screen shrink-0 snap-start items-center justify-center">
+    <div className="flex h-dvh w-screen shrink-0 snap-start items-center justify-center overflow-hidden">
       <Reveal className="h-full w-full">{children}</Reveal>
     </div>
   );
