@@ -75,6 +75,7 @@ export default function Recits() {
         <Prologue
           title="Qui se cache derrière Fablioo ?"
           content="Issu de l'animation, je transpose l'art de captiver et de structurer dans le développement web. Je conçois des outils où la technicité rencontre l'amusement. Mon équilibre : une architecture instructive au service d'une expérience divertissante."
+          secondaryContent="Instruire et divertir : c'est ainsi que je construis chaque projet, pour qu'il reste aussi utile qu'agréable à vivre. Cette philosophie, je vous propose de la découvrir chapitre après chapitre."
         />
 
         <ChaptersScroller>

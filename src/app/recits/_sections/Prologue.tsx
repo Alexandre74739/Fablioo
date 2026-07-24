@@ -11,9 +11,14 @@ import Button from "@/_components/ui/Button";
 interface PrologueProps {
   title: string;
   content: string;
+  secondaryContent: string;
 }
 
-export default function Prologue({ title, content }: PrologueProps) {
+export default function Prologue({
+  title,
+  content,
+  secondaryContent,
+}: PrologueProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -131,14 +136,11 @@ export default function Prologue({ title, content }: PrologueProps) {
                 <p className="mt-2 max-w-xl text-base leading-relaxed text-encre/80 md:mt-4 md:text-lg">
                   {content}
                 </p>
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-encre/80 md:mt-4 md:text-lg">
+                  {secondaryContent}
+                </p>
               </Reveal>
               <Reveal delay={0.6}>
-                <p className="mt-4 max-w-xl text-base leading-relaxed text-encre/80 md:mt-4 md:text-lg">
-                  Instruire et divertir : c'est ainsi que je construis chaque
-                  projet, pour qu'il reste aussi utile qu'agréable à vivre.
-                  Cette philosophie, je vous propose de la découvrir chapitre
-                  après chapitre.
-                </p>
                 <div className="mt-6 flex flex-wrap items-center gap-6 md:mt-10">
                   <Button
                     content="Je prend rendez-vous"

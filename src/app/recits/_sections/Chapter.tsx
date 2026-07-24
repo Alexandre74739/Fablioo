@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Button from "@/_components/ui/Button";
 import FloatingBlob from "@/_components/animations/FloatingBlob";
+import Reveal from "@/_components/animations/Reveal";
 
 interface ChapterButtonProps {
   content: string;
@@ -97,49 +98,58 @@ export default function Chapter({
               {number}
             </span>
 
-            <span className="block text-xs font-bold tracking-widest text-rosewood uppercase md:text-lg">
-              Chapitre {number}
-            </span>
-            <span
-              aria-hidden="true"
-              className="relative mt-2 block h-0.5 w-10 rounded-full bg-rosewood/30 md:mt-3 md:w-14"
-            />
+            <Reveal>
+              <span className="block text-xs font-bold tracking-widest text-rosewood uppercase md:text-lg">
+                Chapitre {number}
+              </span>
+              <span
+                aria-hidden="true"
+                className="relative mt-2 block h-0.5 w-10 rounded-full bg-rosewood/30 md:mt-3 md:w-14"
+              />
+            </Reveal>
 
-            <h2
-              id={headingId}
-              className="mt-3 max-w-xl text-2xl font-extrabold text-encre md:mt-4 md:text-5xl"
-            >
-              {title}
-            </h2>
+            <Reveal delay={0.2}>
+              <h2
+                id={headingId}
+                className="mt-3 max-w-xl text-2xl font-extrabold text-encre md:mt-4 md:text-5xl"
+              >
+                {title}
+              </h2>
+            </Reveal>
 
-            <div className="mt-4 flex flex-col gap-3 text-sm leading-snug text-encre/80 md:mt-6 md:gap-4 md:text-lg md:leading-relaxed">
-              {paragraphs.map((paragraph, i) => (
-                <p
-                  key={i}
-                  className={
-                    i === 0
-                      ? "first-letter:float-left first-letter:mr-2 first-letter:mt-0.5 first-letter:font-quote first-letter:text-4xl first-letter:leading-[0.8] first-letter:text-rosewood first-letter:italic md:first-letter:mr-3 md:first-letter:mt-1 md:first-letter:text-7xl"
-                      : undefined
-                  }
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            <Reveal delay={0.4}>
+              <div className="mt-4 flex flex-col gap-3 text-sm leading-snug text-encre/80 md:mt-6 md:gap-4 md:text-lg md:leading-relaxed">
+                {paragraphs.map((paragraph, i) => (
+                  <p
+                    key={i}
+                    className={
+                      i === 0
+                        ? "first-letter:float-left first-letter:mr-2 first-letter:mt-0.5 first-letter:font-quote first-letter:text-4xl first-letter:leading-[0.8] first-letter:text-rosewood first-letter:italic md:first-letter:mr-3 md:first-letter:mt-1 md:first-letter:text-7xl"
+                        : undefined
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
 
             {button && (
-              <div className="mt-4 md:mt-8">
-                <Button
-                  content={button.content}
-                  href={button.href}
-                  onClick={button.onClick}
-                />
-              </div>
+              <Reveal delay={0.6}>
+                <div className="mt-4 md:mt-8">
+                  <Button
+                    content={button.content}
+                    href={button.href}
+                    onClick={button.onClick}
+                  />
+                </div>
+              </Reveal>
             )}
           </div>
         </div>
 
-        <div
+        <Reveal
+          delay={0.4}
           className={`relative hidden items-center justify-center lg:flex ${illustrationOrder}`}
         >
           <div className="relative flex items-center justify-center p-16 lg:p-24">
@@ -157,7 +167,7 @@ export default function Chapter({
             />
             <div className="relative z-10 drop-shadow-xl">{illustration}</div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
