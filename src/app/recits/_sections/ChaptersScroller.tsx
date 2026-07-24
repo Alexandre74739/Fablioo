@@ -1,6 +1,7 @@
 "use client";
 
-import { Children, useEffect, useRef, useState, type ReactNode } from "react";
+import { Children, useEffect, useRef, type ReactNode } from "react";
+import Reveal from "@/_components/animations/Reveal";
 
 export const CHAPTERS_SCROLLER_ID = "chapters-scroller";
 
@@ -9,34 +10,9 @@ interface ChapterSlideProps {
 }
 
 function ChapterSlide({ children }: ChapterSlideProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setActive(entry.isIntersecting),
-      { threshold: 0.6 },
-    );
-    observer.observe(el);
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div
-      ref={ref}
-      className="flex h-dvh w-screen shrink-0 snap-start items-center justify-center"
-    >
-      <div
-        className={`h-full w-full transition-all duration-500 ease-out ${
-          active ? "scale-100 opacity-100" : "scale-90 opacity-40"
-        }`}
-      >
-        {children}
-      </div>
+    <div className="flex h-dvh w-screen shrink-0 snap-start items-center justify-center">
+      <Reveal className="h-full w-full">{children}</Reveal>
     </div>
   );
 }
