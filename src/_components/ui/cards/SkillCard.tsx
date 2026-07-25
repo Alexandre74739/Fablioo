@@ -20,11 +20,12 @@ export default function SkillCard({ skill, onClick }: SkillCardProps) {
       data-skill-id={skill.id}
       className="flex h-44 w-40 shrink-0 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border border-encre/10 bg-paper px-4 py-5 text-center shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:scale-105 hover:shadow-xl sm:h-52 sm:w-44 sm:gap-4 sm:px-5"
     >
-      <div className="relative h-11 w-11 shrink-0 sm:h-13 sm:w-13">
+      <div className="pointer-events-none relative h-11 w-11 shrink-0 sm:h-13 sm:w-13">
         <Image
           src={`/logos/${skill.id}.svg`}
           alt={skill.label}
           fill
+          draggable={false}
           className="object-contain"
         />
       </div>

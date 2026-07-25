@@ -110,6 +110,15 @@ export const SKILLS: Skill[] = [
     ],
   },
   {
+    id: "figma",
+    label: "Figma",
+    description: "Un design pensé et validé avant la première ligne de code.",
+    details: [
+      "Figma me permet de maquetter votre site, de tester les parcours et de les partager avec vous avant de développer quoi que ce soit. Vous voyez et validez le rendu final avant qu'il ne devienne du code. J'y crée aussi les assets et logos sur mesure de votre projet.",
+      "Pourquoi c'est important selon moi : mieux vaut ajuster une maquette en cinq minutes qu'un site déjà développé. Ça évite les allers-retours inutiles et ça nous fait gagner du temps à tous les deux.",
+    ],
+  },
+  {
     id: "godot",
     label: "Godot",
     description: "Des expériences interactives, pensées comme un jeu.",
