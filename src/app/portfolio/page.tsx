@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/app/portfolio/_sections/Hero";
+import Skills from "@/app/portfolio/_sections/Skills";
 
 export const metadata: Metadata = {
   title: "Portfolio | Sites web réalisés sur mesure",
@@ -21,6 +22,7 @@ export default function Portfolio() {
           label="Discuter de votre projet"
           href="/contact"
         />
+        <Skills />
       </main>
     </div>
   );
