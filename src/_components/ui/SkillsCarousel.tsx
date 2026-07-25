@@ -1,55 +1,17 @@
 "use client";
 
-import { useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useAnimationFrame, useMotionValue } from "motion/react";
-import SkillCard, { type Skill } from "@/_components/ui/cards/SkillCard";
+import SkillCard from "@/_components/ui/cards/SkillCard";
+import type { Skill } from "@/_components/ui/cards/SkillCard";
 import SkillModal from "@/_components/ui/modals/Skill";
 
 const MIN_TILES_PER_HALF = 28;
 const SPEED = 60;
-const ARC_RADIUS = 2200;
-const ARC_MAX_DX = 640;
-
-interface ArcCardProps {
-  skill: Skill;
-  containerRef: RefObject<HTMLDivElement | null>;
-}
-
-function ArcCard({ skill, containerRef }: ArcCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const y = useMotionValue(0);
-  const rotate = useMotionValue(0);
-
-  useAnimationFrame(() => {
-    const el = ref.current;
-    const container = containerRef.current;
-    if (!el || !container) return;
-
-    const cardRect = el.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    const halfWidth = containerRect.width / 2;
-    if (!halfWidth) return;
-
-    const cardCenter = cardRect.left + cardRect.width / 2;
-    const containerCenter = containerRect.left + halfWidth;
-    const dx = Math.max(
-      -ARC_MAX_DX,
-      Math.min(ARC_MAX_DX, cardCenter - containerCenter),
-    );
-
-    const arcDrop = ARC_RADIUS - Math.sqrt(ARC_RADIUS * ARC_RADIUS - dx * dx);
-    const angle = (Math.asin(dx / ARC_RADIUS) * 180) / Math.PI;
-
-    y.set(arcDrop);
-    rotate.set(angle);
-  });
-
-  return (
-    <motion.div ref={ref} style={{ y, rotate }} className="shrink-0">
-      <SkillCard skill={skill} />
-    </motion.div>
-  );
-}
+// Radius/reach are expressed relative to the container width (not fixed px)
+// so the curve stays proportionally as wide and as gentle on any screen size.
+const ARC_RADIUS_RATIO = 3.75;
+const ARC_MAX_DX_RATIO = 1.5;
 
 interface SkillsCarouselProps {
   skills: Skill[];
@@ -60,9 +22,18 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
   const x = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const halfWidthRef = useRef(0);
   const isInteractingRef = useRef(false);
   const hasDraggedRef = useRef(false);
+  // Each card's center, relative to the container and with the current
+  // track offset removed, measured directly per card (not reconstructed
+  // via index * pitch, which drifts if spacing isn't perfectly uniform).
+  // Only recomputed on resize/breakpoint change, never per frame.
+  const cardOffsetsRef = useRef<number[]>([]);
+  const containerWidthRef = useRef(0);
+  const arcRadiusRef = useRef(0);
+  const arcMaxDxRef = useRef(0);
 
   const repeats = Math.max(1, Math.ceil(MIN_TILES_PER_HALF / skills.length));
   const halfTrack = Array.from({ length: repeats }, () => skills).flat();
@@ -77,6 +48,33 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
     x.set(normalized - half);
   }
 
+  function measureLayout() {
+    const container = containerRef.current;
+    if (!container) return;
+    const containerRect = container.getBoundingClientRect();
+    const currentX = x.get();
+
+    containerWidthRef.current = containerRect.width;
+    arcRadiusRef.current = containerRect.width * ARC_RADIUS_RATIO;
+    arcMaxDxRef.current = containerRect.width * ARC_MAX_DX_RATIO;
+    cardOffsetsRef.current = cardRefs.current.map((el) => {
+      if (!el) return 0;
+      const rect = el.getBoundingClientRect();
+      // Center of the card relative to the container, with the current
+      // track transform subtracted out so it stays valid as x keeps moving.
+      return rect.left + rect.width / 2 - containerRect.left - currentX;
+    });
+  }
+
+  useEffect(() => {
+    measureLayout();
+    const container = containerRef.current;
+    if (!container) return;
+    const observer = new ResizeObserver(measureLayout);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
   useAnimationFrame((_, delta) => {
     const track = trackRef.current;
     if (!track) return;
@@ -87,6 +85,26 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
       x.set(x.get() - (SPEED * delta) / 1000);
       wrap();
     }
+
+    const containerWidth = containerWidthRef.current;
+    const offsets = cardOffsetsRef.current;
+    const arcRadius = arcRadiusRef.current;
+    const arcMaxDx = arcMaxDxRef.current;
+    if (!containerWidth || offsets.length === 0 || !arcRadius) return;
+    const currentX = x.get();
+    const halfContainer = containerWidth / 2;
+
+    cardRefs.current.forEach((el, index) => {
+      if (!el) return;
+      const cardCenter = offsets[index] + currentX;
+      const dx = Math.max(
+        -arcMaxDx,
+        Math.min(arcMaxDx, cardCenter - halfContainer),
+      );
+      const arcDrop = arcRadius - Math.sqrt(arcRadius * arcRadius - dx * dx);
+      const angle = (Math.asin(dx / arcRadius) * 180) / Math.PI;
+      el.style.transform = `translateY(${arcDrop}px) rotate(${angle}deg)`;
+    });
   });
 
   function handleRowClick(event: React.MouseEvent<HTMLDivElement>) {
@@ -103,7 +121,7 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
   return (
     <div
       ref={containerRef}
-      className="relative overflow-x-hidden pt-6 pb-28 md:pt-8 md:pb-32"
+      className="relative overflow-hidden pt-6 pb-28 md:pt-8 md:pb-32"
       style={{
         maskImage:
           "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
@@ -132,11 +150,15 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
         onClick={handleRowClick}
       >
         {fullTrack.map((skill, index) => (
-          <ArcCard
+          <div
             key={`${skill.id}-${index}`}
-            skill={skill}
-            containerRef={containerRef}
-          />
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
+            className="shrink-0"
+          >
+            <SkillCard skill={skill} />
+          </div>
         ))}
       </motion.div>
 

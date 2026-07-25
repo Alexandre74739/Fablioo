@@ -51,7 +51,7 @@ export default function Hero({
 
         <motion.div
           style={{ y: decorY }}
-          className="pointer-events-none absolute inset-x-0 -top-8 z-10 h-[68%]"
+          className="pointer-events-none absolute inset-x-0 -top-16 z-10 h-[68%]"
         >
           <Image
             src="parallaxe/Décor-ciel.svg"
