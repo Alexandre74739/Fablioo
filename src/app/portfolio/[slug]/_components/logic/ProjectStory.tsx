@@ -1,4 +1,4 @@
-import StoryPath from "../views/StoryPath";
+import StoryPath from "./StoryPath";
 import StoryPartSection, {
   GRID,
   type StoryPart,

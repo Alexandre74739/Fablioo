@@ -84,7 +84,7 @@ export default function ProjectGallery({
   }
 
   return (
-    <section className="relative overflow-hidden border-t border-encre/10 bg-paper py-20 md:py-28">
+    <section className="relative overflow-hidden bg-paper py-20 md:py-28">
       <div className="container relative z-10 mx-auto flex max-w-6xl flex-col gap-14 px-4">
         {images.length > 0 && (
           <Reveal>
