@@ -41,7 +41,7 @@ export default function Hero({
           className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[68%]"
         >
           <Image
-            src="parallaxe/Ciel.svg"
+            src="/parallaxe/Ciel.svg"
             alt=""
             fill
             preload
@@ -54,7 +54,7 @@ export default function Hero({
           className="pointer-events-none absolute inset-x-0 -top-16 z-10 h-[68%]"
         >
           <Image
-            src="parallaxe/Décor-ciel.svg"
+            src="/parallaxe/Décor-ciel.svg"
             alt=""
             fill
             preload
@@ -65,7 +65,7 @@ export default function Hero({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 md:origin-bottom md:scale-y-[0.85]">
           <motion.div style={{ y: forestY }} className="relative">
             <Image
-              src="parallaxe/Forêt.svg"
+              src="/parallaxe/Forêt.svg"
               alt=""
               width={1280}
               height={630}
@@ -114,7 +114,7 @@ export default function Hero({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 md:origin-bottom md:scale-y-[0.85]">
           <motion.div style={{ y: stoneY }} className="relative">
             <Image
-              src="parallaxe/Grass.svg"
+              src="/parallaxe/Grass.svg"
               alt=""
               width={1280}
               height={297}

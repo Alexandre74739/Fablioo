@@ -33,7 +33,7 @@ export default function Hero({ quote, content }: HeroProps) {
           className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[68%]"
         >
           <Image
-            src="parallaxe/Ciel.svg"
+            src="/parallaxe/Ciel.svg"
             alt=""
             fill
             preload
@@ -46,7 +46,7 @@ export default function Hero({ quote, content }: HeroProps) {
           className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[68%]"
         >
           <Image
-            src="parallaxe/Décor-ciel.svg"
+            src="/parallaxe/Décor-ciel.svg"
             alt=""
             fill
             preload
@@ -57,7 +57,7 @@ export default function Hero({ quote, content }: HeroProps) {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 md:origin-bottom md:scale-y-[0.85]">
           <motion.div style={{ y: forestY }} className="relative">
             <Image
-              src="parallaxe/Forêt.svg"
+              src="/parallaxe/Forêt.svg"
               alt=""
               width={1280}
               height={630}
@@ -79,14 +79,14 @@ export default function Hero({ quote, content }: HeroProps) {
           <Reveal delay={0}>
             <div className="flex flex-col items-center">
               <Image
-                src="logo/logo-icone.svg"
+                src="/logo/logo-icone.svg"
                 alt=""
                 width={103}
                 height={84}
                 className="h-32 w-auto md:h-40"
               />
               <Image
-                src="logo/logo-ecrit.svg"
+                src="/logo/logo-ecrit.svg"
                 alt="Fablioo"
                 width={122}
                 height={32}
@@ -109,7 +109,7 @@ export default function Hero({ quote, content }: HeroProps) {
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 md:origin-bottom md:scale-y-[0.85]">
           <motion.div style={{ y: stoneY }} className="relative">
             <Image
-              src="parallaxe/Pierre.svg"
+              src="/parallaxe/Pierre.svg"
               alt=""
               width={1280}
               height={297}
@@ -129,7 +129,7 @@ export default function Hero({ quote, content }: HeroProps) {
           className="pointer-events-none absolute left-[-35%] top-[22%] z-45 w-64 md:left-0 md:w-80"
         >
           <Image
-            src="parallaxe/oiseau 1.svg"
+            src="/parallaxe/oiseau 1.svg"
             alt=""
             width={435}
             height={214}

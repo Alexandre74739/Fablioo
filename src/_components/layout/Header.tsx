@@ -35,14 +35,14 @@ export default function Header() {
         <div className="flex h-20 items-center justify-between px-5">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="logo/logo-ecrit.svg"
+              src="/logo/logo-ecrit.svg"
               alt="Fablioo"
               width={122}
               height={32}
               className="h-8 w-auto"
             />
             <Image
-              src="logo/logo-icone.svg"
+              src="/logo/logo-icone.svg"
               alt=""
               width={103}
               height={84}
