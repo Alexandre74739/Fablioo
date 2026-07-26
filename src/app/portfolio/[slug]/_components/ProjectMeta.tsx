@@ -10,7 +10,7 @@ export default function ProjectMeta({ tech, siteUrl }: ProjectMetaProps) {
   return (
     <Reveal
       delay={0.1}
-      className="flex flex-col gap-6 rounded-2xl border border-encre/10 bg-paper p-6 sm:flex-row sm:items-center sm:justify-between md:p-8"
+      className="flex flex-col gap-6 rounded-2xl border border-encre/20 bg-paper shadow-md p-6 sm:flex-row sm:items-center sm:justify-between md:p-8"
     >
       <div>
         <div className="flex items-center gap-2 text-encre/60">
@@ -23,7 +23,7 @@ export default function ProjectMeta({ tech, siteUrl }: ProjectMetaProps) {
           {tech.map((item) => (
             <li
               key={item}
-              className="rounded-full border border-encre/10 bg-sand/20 px-3 py-1 text-sm text-encre/80"
+              className="rounded-full border border-encre/10 bg-sand/20 px-3 py-1 text-sm text-encre/80 font-medium"
             >
               {item}
             </li>

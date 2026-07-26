@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "@/_components/animations/Reveal";
+import NavButton from "@/_components/ui/NavButton";
 
 interface ProjectGalleryProps {
   images: string[];
@@ -12,17 +12,71 @@ interface ProjectGalleryProps {
 
 export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const looping = images.length > 1;
+  // Clone the last slide before the first and the first slide after the last,
+  // so scrolling past an edge keeps moving in the same direction instead of
+  // snapping back to the start — the reset onto the real slide happens
+  // invisibly once the scroll settles on a clone.
+  const slides = looping
+    ? [images[images.length - 1], ...images, images[0]]
+    : images;
+
+  useEffect(() => {
+    if (!looping) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const slide = track.querySelector<HTMLElement>("[data-gallery-slide]");
+    const amount = slide ? slide.offsetWidth + 20 : track.clientWidth;
+    track.scrollLeft = amount;
+  }, [looping]);
+
+  useEffect(() => {
+    if (!looping) return;
+    const track = trackRef.current;
+    if (!track) return;
+
+    let settleTimeout: ReturnType<typeof setTimeout>;
+    function handleScroll() {
+      clearTimeout(settleTimeout);
+      settleTimeout = setTimeout(() => {
+        if (!track) return;
+        const slide = track.querySelector<HTMLElement>("[data-gallery-slide]");
+        const amount = slide ? slide.offsetWidth + 20 : track.clientWidth;
+        const index = Math.round(track.scrollLeft / amount);
+
+        if (index === 0) {
+          track.scrollLeft = images.length * amount;
+        } else if (index === slides.length - 1) {
+          track.scrollLeft = amount;
+        }
+      }, 120);
+    }
+
+    track.addEventListener("scroll", handleScroll);
+    return () => {
+      track.removeEventListener("scroll", handleScroll);
+      clearTimeout(settleTimeout);
+    };
+  }, [looping, images.length, slides.length]);
 
   if (images.length === 0) {
     return null;
   }
 
-  function scroll(direction: 1 | -1) {
+  function goToPrevious() {
     const track = trackRef.current;
     if (!track) return;
     const slide = track.querySelector<HTMLElement>("[data-gallery-slide]");
-    const amount = slide ? slide.offsetWidth + 20 : track.clientWidth * 0.8;
-    track.scrollBy({ left: direction * amount, behavior: "smooth" });
+    const amount = slide ? slide.offsetWidth + 20 : track.clientWidth;
+    track.scrollBy({ left: -amount, behavior: "smooth" });
+  }
+
+  function goToNext() {
+    const track = trackRef.current;
+    if (!track) return;
+    const slide = track.querySelector<HTMLElement>("[data-gallery-slide]");
+    const amount = slide ? slide.offsetWidth + 20 : track.clientWidth;
+    track.scrollBy({ left: amount, behavior: "smooth" });
   }
 
   return (
@@ -32,42 +86,36 @@ export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
 
         {images.length > 1 && (
           <div className="flex shrink-0 gap-2">
-            <button
-              type="button"
-              onClick={() => scroll(-1)}
-              aria-label="Image précédente"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-encre/15 text-encre/70 transition-colors duration-300 hover:bg-sand/30"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll(1)}
-              aria-label="Image suivante"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-encre/15 text-encre/70 transition-colors duration-300 hover:bg-sand/30"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
+            <NavButton
+              direction="previous"
+              onClick={goToPrevious}
+              label="Voir l'image précédente"
+            />
+            <NavButton
+              direction="next"
+              onClick={goToNext}
+              label="Voir l'image suivante"
+            />
           </div>
         )}
       </div>
 
       <div
         ref={trackRef}
-        className="mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="no-scrollbar mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2"
       >
-        {images.map((src) => (
+        {slides.map((src, i) => (
           <div
-            key={src}
+            key={`${src}-${i}`}
             data-gallery-slide
-            className="group relative aspect-video w-[88%] shrink-0 snap-center overflow-hidden rounded-2xl shadow-md sm:w-[75%] md:w-[70%]"
+            className="relative aspect-video w-full shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg"
           >
             <Image
               src={src}
               alt={alt}
               fill
-              sizes="(min-width: 768px) 70vw, 88vw"
-              className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+              sizes="(min-width: 1024px) 896px, 100vw"
+              className="object-cover object-top"
             />
           </div>
         ))}

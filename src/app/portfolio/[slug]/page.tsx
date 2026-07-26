@@ -129,7 +129,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
-        <section className="relative overflow-hidden border-t border-encre/10 bg-paper py-20 md:py-28">
+        <section className="relative overflow-hidden py-20 md:py-28">
           <FloatingBlob
             src="/shapes/blob-3.svg"
             className="-right-20 top-1/4 hidden h-52 w-52 opacity-50 md:block"
