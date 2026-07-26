@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Reveal from "@/_components/animations/Reveal";
 import ArianeFil, { type BreadcrumbItem } from "@/_components/ui/ArianeFil";
+import ProjectMeta from "./ProjectMeta";
 
 interface ProjectHeroProps {
   breadcrumb: BreadcrumbItem[];
@@ -8,6 +9,8 @@ interface ProjectHeroProps {
   title: string;
   description: string;
   image: string;
+  tech: string[];
+  siteUrl: string;
 }
 
 export default function ProjectHero({
@@ -16,6 +19,8 @@ export default function ProjectHero({
   title,
   description,
   image,
+  tech,
+  siteUrl,
 }: ProjectHeroProps) {
   return (
     <section className="relative overflow-hidden bg-paper pt-32 pb-16 md:pt-40 md:pb-20">
@@ -43,10 +48,15 @@ export default function ProjectHero({
             alt={title}
             fill
             sizes="(min-width: 1024px) 1152px, 100vw"
+            quality={90}
             className="object-cover object-top"
             priority
           />
         </Reveal>
+
+        <div className="mt-8 md:mt-12">
+          <ProjectMeta tech={tech} siteUrl={siteUrl} />
+        </div>
       </div>
     </section>
   );

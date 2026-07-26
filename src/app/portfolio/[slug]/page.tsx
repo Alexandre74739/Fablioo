@@ -55,6 +55,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           title={project.title}
           description={project.description}
           image={project.image}
+          tech={project.tech}
+          siteUrl={project.siteUrl}
         />
 
         <ProjectStory details={project.details} caseStudy={project.caseStudy} />
@@ -67,8 +69,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <ProjectGallery
           images={project.caseStudy?.illustrations ?? []}
           alt={project.title}
-          tech={project.tech}
-          siteUrl={project.siteUrl}
         />
       </main>
     </div>

@@ -4,21 +4,13 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Reveal from "@/_components/animations/Reveal";
 import NavButton from "@/_components/ui/NavButton";
-import ProjectMeta from "../views/ProjectMeta";
 
 interface ProjectGalleryProps {
   images: string[];
   alt: string;
-  tech: string[];
-  siteUrl: string;
 }
 
-export default function ProjectGallery({
-  images,
-  alt,
-  tech,
-  siteUrl,
-}: ProjectGalleryProps) {
+export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const looping = images.length > 1;
   // Clone the last slide before the first and the first slide after the last,
@@ -84,15 +76,24 @@ export default function ProjectGallery({
   }
 
   return (
-    <section className="relative overflow-hidden bg-paper py-20 md:py-28">
+    <section className="relative overflow-hidden mb-16 md:mb-8">
       <div className="container relative z-10 mx-auto flex max-w-6xl flex-col gap-14 px-4">
         {images.length > 0 && (
           <Reveal>
             <div className="flex items-end justify-between gap-4">
-              <h2 className="text-2xl font-bold">Images du projet</h2>
+              <div>
+                <h2 className="text-4xl font-bold text-encre md:text-5xl">
+                  Images du projet
+                </h2>
+                <p className="mt-4 max-w-2xl text-lg text-encre/80 md:text-xl">
+                  Le résultat final du projet, présenté sous différents angles :
+                  interfaces, pages clés et détails qui font la différence au
+                  quotidien.
+                </p>
+              </div>
 
               {images.length > 1 && (
-                <div className="flex shrink-0 gap-2">
+                <div className="hidden shrink-0 gap-2 md:flex">
                   <NavButton
                     direction="previous"
                     onClick={goToPrevious}
@@ -122,15 +123,29 @@ export default function ProjectGallery({
                     alt={alt}
                     fill
                     sizes="(min-width: 1024px) 1152px, 100vw"
+                    quality={90}
                     className="object-cover object-top"
                   />
                 </div>
               ))}
             </div>
+
+            {images.length > 1 && (
+              <div className="mt-6 flex justify-center gap-2 md:hidden">
+                <NavButton
+                  direction="previous"
+                  onClick={goToPrevious}
+                  label="Voir l'image précédente"
+                />
+                <NavButton
+                  direction="next"
+                  onClick={goToNext}
+                  label="Voir l'image suivante"
+                />
+              </div>
+            )}
           </Reveal>
         )}
-
-        <ProjectMeta tech={tech} siteUrl={siteUrl} />
       </div>
     </section>
   );
