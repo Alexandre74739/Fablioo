@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useAnimationFrame, useMotionValue } from "motion/react";
 import SkillCard from "@/_components/ui/cards/SkillCard";
 import type { Skill } from "@/_components/ui/cards/SkillCard";
@@ -48,7 +48,7 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
     x.set(normalized - half);
   }
 
-  function measureLayout() {
+  const measureLayout = useCallback(() => {
     const container = containerRef.current;
     if (!container) return;
     const containerRect = container.getBoundingClientRect();
@@ -64,7 +64,7 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
       // track transform subtracted out so it stays valid as x keeps moving.
       return rect.left + rect.width / 2 - containerRect.left - currentX;
     });
-  }
+  }, [x]);
 
   useEffect(() => {
     measureLayout();
@@ -73,7 +73,7 @@ export default function SkillsCarousel({ skills }: SkillsCarouselProps) {
     const observer = new ResizeObserver(measureLayout);
     observer.observe(container);
     return () => observer.disconnect();
-  }, []);
+  }, [measureLayout]);
 
   useAnimationFrame((_, delta) => {
     const track = trackRef.current;
