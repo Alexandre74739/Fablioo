@@ -7,7 +7,7 @@ import Bandeau from "@/app/_sections/Bandeau";
 import Faq from "@/app/_sections/Faq";
 
 export const metadata: Metadata = {
-  title: "Fablioo | Création de site web design à Saint-Martin-d'Hères",
+  title: "Fablioo",
   description:
     "Design & sites web sur mesure, pensés comme un récit, du premier échange jusqu'à la mise en ligne, à Saint-Martin-d'Hères et Grenoble.",
 };
