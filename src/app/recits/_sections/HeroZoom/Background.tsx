@@ -1,15 +1,28 @@
 "use client";
 
+import { useRef } from "react";
+import { type MotionValue } from "motion/react";
 import ShaderWaves from "@/_components/animations/ShaderWaves";
 import Marquee from "./Marquee";
+import { useSyncedMotionValue } from "./useSyncedMotionValue";
 import { PRUNE, PAPER, PAPER_DIM } from "./constants";
 
 interface BackgroundProps {
   quote1: string;
   quote2: string;
+  scrollYProgress: MotionValue<number>;
 }
 
-export default function Background({ quote1, quote2 }: BackgroundProps) {
+export default function Background({
+  quote1,
+  quote2,
+  scrollYProgress,
+}: BackgroundProps) {
+  const shaderActiveRef = useRef(false);
+  useSyncedMotionValue(scrollYProgress, (v) => {
+    shaderActiveRef.current = v > 0.03;
+  });
+
   return (
     <div className="absolute inset-0 bg-prune">
       <ShaderWaves
@@ -17,6 +30,7 @@ export default function Background({ quote1, quote2 }: BackgroundProps) {
         background={PRUNE}
         lineNear={PAPER}
         lineFar={PAPER_DIM}
+        activeRef={shaderActiveRef}
       />
       <div className="absolute inset-0 bg-linear-to-b from-transparent to-prune" />
 

@@ -65,7 +65,11 @@ export default function HeroZoomSection({
     <>
       <section ref={sectionRef} className="relative h-[280vh] w-full bg-prune">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
-          <Background quote1={quote1} quote2={quote2} />
+          <Background
+            quote1={quote1}
+            quote2={quote2}
+            scrollYProgress={scrollYProgress}
+          />
 
           <div className="absolute inset-0 z-20">
             <ZoomLabel

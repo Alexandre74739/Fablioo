@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { observeRenderVisibility } from "./renderVisibility";
 
 const VERTEX_SHADER = `#version 300 es
@@ -195,6 +195,11 @@ interface ShaderWavesProps {
   background?: RGB;
   lineNear?: RGB;
   lineFar?: RGB;
+  // Contrôle externe additionnel : quand fourni et à false, le rendu GPU
+  // est suspendu (ex. le canvas est entièrement masqué par un élément
+  // opaque au-dessus, donc le dessiner est du travail perdu), sans pour
+  // autant arrêter la boucle interne (qui reste prête à reprendre).
+  activeRef?: RefObject<boolean>;
 }
 
 const DEFAULT_BACKGROUND: RGB = [0.969, 0.945, 0.902];
@@ -206,6 +211,7 @@ export default function ShaderWaves({
   background = DEFAULT_BACKGROUND,
   lineNear = DEFAULT_LINE_NEAR,
   lineFar = DEFAULT_LINE_FAR,
+  activeRef,
 }: ShaderWavesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -278,6 +284,12 @@ export default function ShaderWaves({
     let shouldRender = true;
     const start = performance.now();
 
+    // Un fond animé n'a pas besoin de 60-144 fps : on plafonne les appels
+    // GPU (coûteux, surtout en rendu logiciel) à ~30 fps, tout en gardant
+    // le lissage de la souris à chaque frame pour un suivi du curseur fluide.
+    const TARGET_FRAME_INTERVAL = 1000 / 30;
+    let lastDrawTime = 0;
+
     const render = (now: number) => {
       const elapsed = reduceMotion ? 0 : (now - start) / 1000;
 
@@ -285,12 +297,15 @@ export default function ShaderWaves({
       mouse.y += (mouse.targetY - mouse.y) * 0.08;
       active += (targetActive - active) * 0.08;
 
-      gl.uniform2f(resolutionLoc, canvas.width, canvas.height);
-      gl.uniform1f(timeLoc, elapsed);
-      gl.uniform2f(mouseLoc, mouse.x, mouse.y);
-      gl.uniform1f(mouseActiveLoc, active);
-
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      const isActive = activeRef ? activeRef.current : true;
+      if (isActive && now - lastDrawTime >= TARGET_FRAME_INTERVAL) {
+        lastDrawTime = now;
+        gl.uniform2f(resolutionLoc, canvas.width, canvas.height);
+        gl.uniform1f(timeLoc, elapsed);
+        gl.uniform2f(mouseLoc, mouse.x, mouse.y);
+        gl.uniform1f(mouseActiveLoc, active);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      }
 
       if (shouldRender) {
         frameId = requestAnimationFrame(render);
@@ -320,7 +335,7 @@ export default function ShaderWaves({
       window.removeEventListener("pointerout", handlePointerOut);
       gl.deleteProgram(program);
     };
-  }, [background, lineNear, lineFar]);
+  }, [background, lineNear, lineFar, activeRef]);
 
   return <canvas ref={canvasRef} aria-hidden="true" className={className} />;
 }
