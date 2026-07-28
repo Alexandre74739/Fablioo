@@ -26,10 +26,12 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4">
       <div
-        className={`mx-auto w-full max-w-7xl transition-[margin,border-radius,box-shadow] duration-500 ease-out ${
+        className={`mx-auto w-full max-w-7xl transition-[margin,border-radius,box-shadow,background-color] duration-500 ease-out ${
           scrolled
             ? "mt-4 rounded-3xl bg-paper shadow-[0_8px_30px_-8px_rgba(36,29,26,0.35)]"
-            : "mt-0 rounded-none bg-transparent shadow-none"
+            : isOpen
+              ? "mt-0 rounded-3xl bg-paper shadow-[0_8px_30px_-8px_rgba(36,29,26,0.35)]"
+              : "mt-0 rounded-none bg-transparent"
         }`}
       >
         <div className="flex h-20 items-center justify-between px-5">
