@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const VERTEX_SHADER = `#version 300 es
 const vec2 pos[3] = vec2[3](vec2(-1.0, -1.0), vec2(3.0, -1.0), vec2(-1.0, 3.0));
@@ -80,6 +80,7 @@ export default function ChromaKeyVideo({
 }: ChromaKeyVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -96,6 +97,15 @@ export default function ChromaKeyVideo({
     if (!program) return;
 
     gl.useProgram(program);
+
+    // Buffer explicitement vidé en transparent dès la création du contexte :
+    // tant que la vidéo n'a pas ses dimensions, draw() ne fait aucun appel
+    // WebGL et le canvas garde un buffer non initialisé, que certains
+    // navigateurs compositent en noir opaque au lieu de transparent — ce qui
+    // masque toute la page tant que la vidéo n'a pas fini de charger (voire
+    // définitivement si elle ne charge jamais).
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
     const videoLoc = gl.getUniformLocation(program, "uVideo");
     const thresholdLoc = gl.getUniformLocation(program, "uGreenThreshold");
@@ -134,6 +144,7 @@ export default function ChromaKeyVideo({
         );
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
+        setIsReady(true);
       }
 
       if (!video.ended) {
@@ -162,7 +173,14 @@ export default function ChromaKeyVideo({
         playsInline
         className="hidden"
       />
-      <canvas ref={canvasRef} className={className} />
+      <canvas
+        ref={canvasRef}
+        className={className}
+        style={{
+          opacity: isReady ? 1 : 0,
+          transition: "opacity 0.4s ease-out",
+        }}
+      />
     </>
   );
 }
