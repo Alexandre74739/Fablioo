@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo_Black, Inter, Source_Serif_4 } from "next/font/google";
 import Header from "@/_components/layout/Header";
 import Footer from "@/_components/layout/Footer";
+import PageTransition from "@/_components/layout/PageTransition";
 import "./globals.css";
 
 const archivoBlack = Archivo_Black({
@@ -46,6 +47,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <PageTransition />
       </body>
     </html>
   );

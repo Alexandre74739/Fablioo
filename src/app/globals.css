@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@property --hole {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
 :root {
   color-scheme: only light;
 
@@ -25,6 +31,9 @@
   --font-heading: var(--font-archivo-black);
   --font-quote: var(--font-source-serif);
   --font-sans: var(--font-inter);
+
+  --animate-loading-sweep: loading-sweep 0.9s ease-in-out infinite;
+  --animate-paw-breathe: paw-breathe 1.6s ease-in-out infinite;
 }
 
 body {
@@ -78,6 +87,28 @@ cite {
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes loading-sweep {
+  0% {
+    transform: translateX(-100%) scaleX(0.4);
+  }
+  50% {
+    transform: translateX(60%) scaleX(1);
+  }
+  100% {
+    transform: translateX(220%) scaleX(0.4);
+  }
+}
+
+@keyframes paw-breathe {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08) rotate(-2deg);
   }
 }
 
