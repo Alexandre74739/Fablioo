@@ -11,6 +11,7 @@ Site vitrine Next.js 16 (App Router) + Prisma 7/PostgreSQL. Voir [README.md](REA
 - **Formulaire de contact** : [src/app/contact/actions.ts](src/app/contact/actions.ts) est une Server Action avec honeypot anti-bot, délai minimum de soumission, et sanitisation des champs contre l'injection d'en-têtes e-mail (Resend). Conserver ces protections lors de toute modification.
 - **Images** : uniquement via Vercel Blob (`*.public.blob.vercel-storage.com`, configuré dans `next.config.ts`). Toute nouvelle source d'images distante doit être ajoutée à `images.remotePatterns`.
 - **Alias d'import** : `@/*` pointe vers `src/*` (voir `tsconfig.json`). Utiliser cet alias pour tout ce qui est partagé (`@/_components/...`, `@/lib/...`, `@/hooks/...`) ; utiliser des imports relatifs (`./`) uniquement entre fichiers d'une même route (ex. `page.tsx` → `./_sections/Hero`).
+- **Contenu du portfolio (seed)** : [prisma/seed.ts](prisma/seed.ts) est la source de vérité versionnée des projets/études de cas. `npm run db:seed` n'applique les données qu'à la base ciblée par `DATABASE_URL` (locale en dev). **Ne jamais mettre à jour la base de production depuis un poste local** : la prod n'est seedée qu'au build Vercel (`npm run build` → `prisma migrate deploy && prisma db seed`), donc uniquement lors d'un déploiement déclenché par un push GitHub.
 
 ## Composants : réutilisation avant création
 

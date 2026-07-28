@@ -49,11 +49,13 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 | Script            | Description                                                                  |
 | ----------------- | ----------------------------------------------------------------------------- |
 | `npm run dev`     | Lance le serveur de développement                                            |
-| `npm run build`   | Applique les migrations Prisma (`prisma migrate deploy`) puis build Next.js  |
+| `npm run build`   | Applique les migrations Prisma (`prisma migrate deploy`), seed (`prisma db seed`) puis build Next.js |
 | `npm run start`   | Démarre le serveur en mode production                                       |
 | `npm run lint`    | Lint ESLint                                                                   |
 | `npm run db:push` | Pousse le schéma `prisma/schema.prisma` vers la base sans migration          |
-| `npm run db:seed` | Exécute `prisma/seed.ts`                                                     |
+| `npm run db:seed` | Exécute `prisma/seed.ts` contre `DATABASE_URL`                               |
+
+`prisma/seed.ts` est la source de vérité du contenu portfolio (projets + études de cas). Il n'applique les données qu'à la base ciblée par `DATABASE_URL` : en local, `npm run db:seed` ne touche que la base locale. La base de production n'est mise à jour qu'au build Vercel (`npm run build`, qui inclut `prisma db seed`), donc **uniquement lors d'un déploiement déclenché par un push GitHub** — jamais depuis un poste local.
 
 ### Structure du projet
 
@@ -85,7 +87,7 @@ prisma/
 
 ### Déploiement
 
-Optimisé pour Vercel (Blob Storage pour les images, `build` applique les migrations Prisma automatiquement). Voir [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying).
+Optimisé pour Vercel (Blob Storage pour les images, `build` applique les migrations Prisma et le seed automatiquement contre la base de production configurée dans les Environment Variables Vercel). La base de prod n'est donc mise à jour qu'au moment du déploiement déclenché par un push GitHub, jamais avant. Voir [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying).
 
 ### Notes pour les contributeurs
 
