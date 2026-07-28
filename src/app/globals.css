@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: light;
+  color-scheme: only light;
 
   --color-paper: #f7f1e6;
   --color-encre: #241d1a;
