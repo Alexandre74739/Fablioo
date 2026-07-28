@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Fablioo
 
-## Getting Started
+Site vitrine de Fablioo (Next.js 16 / App Router) : présentation des services, portfolio de projets clients, récits, et formulaire de contact. Le contenu du portfolio est servi depuis PostgreSQL via Prisma.
 
-First, run the development server:
+### Stack
+
+- **Next.js 16** (App Router, Server Actions) + React 19
+- **Prisma 7** avec l'adapter `@prisma/adapter-pg` (PostgreSQL)
+- **Tailwind CSS 4**
+- **Resend** pour l'envoi des e-mails du formulaire de contact
+- **Vercel Blob** pour le stockage des images (`*.public.blob.vercel-storage.com`)
+
+### Prérequis
+
+- Node.js 20+
+- Une base PostgreSQL (locale ou hébergée)
+
+### Installation
+
+```bash
+npm install
+```
+
+Créer un fichier `.env` à la racine avec :
+
+```bash
+DATABASE_URL=postgresql://...
+RESEND_API_KEY=...
+RESEND_FROM_EMAIL="Fablioo <contact@exemple.com>"   # optionnel
+RESEND_TO_EMAIL=destinataire@exemple.com             # optionnel
+```
+
+Puis appliquer le schéma et générer le client Prisma :
+
+```bash
+npm run db:push
+```
+
+### Développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script            | Description                                                                  |
+| ----------------- | ----------------------------------------------------------------------------- |
+| `npm run dev`     | Lance le serveur de développement                                            |
+| `npm run build`   | Applique les migrations Prisma (`prisma migrate deploy`) puis build Next.js  |
+| `npm run start`   | Démarre le serveur en mode production                                       |
+| `npm run lint`    | Lint ESLint                                                                   |
+| `npm run db:push` | Pousse le schéma `prisma/schema.prisma` vers la base sans migration          |
+| `npm run db:seed` | Exécute `prisma/seed.ts`                                                     |
 
-## Learn More
+### Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/                  routes (App Router)
+    page.tsx            page d'accueil
+    services/            offres (web, design, maintenance)
+    portfolio/            liste + fiche projet ([slug])
+    recits/              contenu éditorial
+    contact/              formulaire (Server Action dans actions.ts)
+    confidentialite/, cookies/, mentions-legales/   pages légales
+    sitemap.ts, robots.ts   SEO
+  _components/          composants partagés (ui, layout, animations, legal, icons)
+  lib/                   accès données (prisma.ts, projects.ts)
+  generated/prisma/      client Prisma généré (ne pas éditer)
+  hooks/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+prisma/
+  schema.prisma          modèles Project / SpecifiqueProject
+  seed.ts                 script de seed
+  migrations/
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Modèle de données
 
-## Deploy on Vercel
+- `Project` : un projet du portfolio (slug, titre, description, techs, image, `siteUrl`).
+- `SpecifiqueProject` : étude de cas détaillée liée 1-1 à un `Project` (contexte, objectifs, cibles, contraintes, résultats, avant/après, illustrations).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Déploiement
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Optimisé pour Vercel (Blob Storage pour les images, `build` applique les migrations Prisma automatiquement). Voir [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying).
+
+### Notes pour les contributeurs
+
+Ce projet utilise une version de Next.js dont les conventions peuvent différer de la doc habituelle — voir [AGENTS.md](AGENTS.md) avant de modifier du code lié au framework.
