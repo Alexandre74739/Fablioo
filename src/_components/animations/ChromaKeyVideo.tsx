@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { observeRenderVisibility } from "./renderVisibility";
 
 const VERTEX_SHADER = `#version 300 es
 const vec2 pos[3] = vec2[3](vec2(-1.0, -1.0), vec2(3.0, -1.0), vec2(-1.0, 3.0));
@@ -122,6 +123,8 @@ export default function ChromaKeyVideo({
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
     let frameId: number;
+    let isRunning = false;
+    let shouldRender = true;
 
     const draw = () => {
       if (video.videoWidth && video.videoHeight) {
@@ -147,16 +150,34 @@ export default function ChromaKeyVideo({
         setIsReady(true);
       }
 
-      if (!video.ended) {
+      if (!video.ended && shouldRender) {
         frameId = requestAnimationFrame(draw);
+      } else {
+        isRunning = false;
       }
     };
 
+    const startLoop = () => {
+      if (isRunning || video.ended) return;
+      isRunning = true;
+      video.play().catch(() => {});
+      frameId = requestAnimationFrame(draw);
+    };
+
     video.playbackRate = 1;
-    video.play().catch(() => {});
-    frameId = requestAnimationFrame(draw);
+    startLoop();
+
+    const stopVisibilityGate = observeRenderVisibility(canvas, (visible) => {
+      shouldRender = visible;
+      if (visible) {
+        startLoop();
+      } else {
+        video.pause();
+      }
+    });
 
     return () => {
+      stopVisibilityGate();
       cancelAnimationFrame(frameId);
       gl.deleteTexture(texture);
       gl.deleteProgram(program);

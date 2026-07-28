@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { observeRenderVisibility } from "./renderVisibility";
 
 const VERTEX_SHADER = `#version 300 es
 const vec2 pos[3] = vec2[3](vec2(-1.0, -1.0), vec2(3.0, -1.0), vec2(-1.0, 3.0));
@@ -270,6 +271,11 @@ export default function ShaderWaves({
     resize();
 
     let frameId: number;
+    let isRunning = false;
+    // Sans ça, le shader tourne en boucle infinie même hors écran ou onglet
+    // en arrière-plan : la charge WebGL reste sur le fil principal (surtout
+    // sans accélération GPU) alors que rien n'est visible.
+    let shouldRender = true;
     const start = performance.now();
 
     const render = (now: number) => {
@@ -285,11 +291,29 @@ export default function ShaderWaves({
       gl.uniform1f(mouseActiveLoc, active);
 
       gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+      if (shouldRender) {
+        frameId = requestAnimationFrame(render);
+      } else {
+        isRunning = false;
+      }
+    };
+
+    const startLoop = () => {
+      if (isRunning) return;
+      isRunning = true;
       frameId = requestAnimationFrame(render);
     };
-    frameId = requestAnimationFrame(render);
+
+    startLoop();
+
+    const stopVisibilityGate = observeRenderVisibility(canvas, (visible) => {
+      shouldRender = visible;
+      if (visible) startLoop();
+    });
 
     return () => {
+      stopVisibilityGate();
       cancelAnimationFrame(frameId);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", handlePointerMove);
