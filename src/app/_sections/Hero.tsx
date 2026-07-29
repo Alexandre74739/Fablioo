@@ -106,7 +106,7 @@ export default function Hero({ quote, content }: HeroProps) {
           </Reveal>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 md:origin-bottom md:scale-y-[0.85]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 md:translate-y-8 md:origin-bottom md:scale-y-[0.85]">
           <motion.div style={{ y: stoneY }} className="relative">
             <Image
               src="/parallaxe/Pierre.svg"
