@@ -22,7 +22,7 @@ export default function MentionsLegales() {
         commercial <strong>Fablioo</strong>.
       </p>
       <ul>
-        <li>SIRET : [SIRET à compléter]</li>
+        <li>SIRET : 98345273100018</li>
         <li>Lieu d'exercice : Saint-Martin-d'Hères / Grenoble, France</li>
         <li>
           Contact : via le <a href="/contact">formulaire de contact</a> ou à
