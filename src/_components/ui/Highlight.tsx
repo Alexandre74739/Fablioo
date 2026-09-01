@@ -3,18 +3,14 @@
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
 
-// Trait de marqueur (silhouette à bords irréguliers) qui se peint de gauche à droite.
 const MARKER_PATH =
   "M4,30 C1,18 6,9 20,7 C70,2 140,6 210,5 C255,4 285,2 292,10 C299,17 300,26 295,34 C299,42 288,49 262,46 C180,50 90,47 34,45 C14,44 7,40 4,30 Z";
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
 interface HighlightProps {
   children: ReactNode;
-  /** Désactive l'animation d'entrée (prefers-reduced-motion). */
   reduce?: boolean;
-  /** Couleur du marqueur. */
   fill?: string;
-  /** Classe du texte posé sur le marqueur. */
   className?: string;
   delay?: number;
 }

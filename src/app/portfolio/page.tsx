@@ -27,7 +27,7 @@ export default async function Portfolio({ searchParams }: PortfolioProps) {
           title="Un portfolio de projets pensés comme"
           highlight="des histoires"
           content="Une sélection de réalisations pensées pour être vécues, pas seulement vues, du premier échange à la mise en ligne."
-          label="Discuter de votre projet"
+          label="Discutons de votre projet"
           href="/contact"
         />
         <Skills />
