@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 import Button from "@/_components/ui/Button";
+import LinkedinIcon from "@/_components/icons/LinkedinIcon";
+import GithubIcon from "@/_components/icons/GithubIcon";
 
 // Valeur JS (px) équivalente aux breakpoints Tailwind, recalculée au resize car useTransform ne peut pas lire des classes responsive.
 function getGrassMaxTranslate(width: number) {
@@ -19,13 +21,41 @@ const navLinks = [
   { label: "Récits", href: "/recits" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Services", href: "/services" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const legalLinks = [
   { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Politique de confidentialité", href: "/confidentialite" },
-  { label: "Politique de cookies", href: "/cookies" },
+  { label: "Confidentialité", href: "/confidentialite" },
+  { label: "Cookies", href: "/cookies" },
 ];
+
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/alexandre74739",
+    Icon: LinkedinIcon,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/Alexandre74739",
+    Icon: GithubIcon,
+  },
+];
+
+function ColumnTitle({ children }: { children: string }) {
+  return (
+    <span className="mb-3 flex flex-col items-center gap-2 md:items-start">
+      <span className="font-heading text-xs font-bold uppercase tracking-widest text-paper">
+        {children}
+      </span>
+      <span
+        aria-hidden="true"
+        className="h-0.5 w-8 rounded-full bg-paper/25"
+      />
+    </span>
+  );
+}
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -60,31 +90,12 @@ export default function Footer() {
         />
       </motion.div>
 
-      <div className="relative bg-prune px-6 pt-2 pb-10 md:px-8 md:pb-12">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10">
-          <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-center md:justify-between md:text-left">
-            <Link href="/">
-              <Image
-                src="/logo/logo-icone.svg"
-                alt="Fablioo"
-                width={103}
-                height={84}
-                className="h-24 w-auto"
-              />
-            </Link>
-
-            <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="link-underline text-base font-semibold text-paper transition-colors hover:text-sand"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-
+      <div className="relative bg-prune px-6 pt-4 pb-10 md:px-8 md:pb-14">
+        <div className="mx-auto flex max-w-6xl flex-col">
+          <div className="flex flex-col items-center gap-6 pb-12 text-center md:flex-row md:items-end md:justify-between md:text-left">
+            <h2 className="max-w-lg text-3xl font-bold text-paper md:text-4xl">
+              Et si on écrivait le prochain chapitre ?
+            </h2>
             <Button
               content="Discutons de votre projet"
               href="/contact"
@@ -92,24 +103,71 @@ export default function Footer() {
             />
           </div>
 
-          <div className="h-px w-full bg-paper/15" />
+          <div className="h-px w-full bg-paper/20" />
 
-          <div className="flex flex-col-reverse items-center text-center gap-4 text-sm text-paper/80 md:flex-row md:justify-between">
-            <p>
-              © {year} Fablioo — Alexandre-Philippe Perez. Tous droits réservés.
-            </p>
-            <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-12 text-center md:grid-cols-[1.4fr_1fr_1fr] md:text-left">
+            <div className="col-span-2 flex flex-col items-center gap-4 md:col-span-1 md:items-start">
+              <Link href="/" className="w-fit">
+                <Image
+                  src="/logo/logo-icone.svg"
+                  alt="Fablioo, retour à l'accueil"
+                  width={103}
+                  height={84}
+                  className="h-16 w-auto"
+                />
+              </Link>
+              <address className="max-w-xs text-sm not-italic leading-relaxed text-paper/80">
+                Studio de design & création de sites web sur mesure à
+                Saint-Martin-d'Hères et Grenoble.
+              </address>
+              <div className="mt-1 flex items-center gap-3">
+                {socialLinks.map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-paper/40 text-paper/80 transition-colors duration-300 hover:border-paper hover:bg-paper hover:text-prune"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <nav className="flex flex-col items-center gap-2.5 md:items-start">
+              <ColumnTitle>Naviguer</ColumnTitle>
+              {navLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="link-underline w-fit text-sm text-paper/80 transition-colors duration-300 hover:text-paper"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <nav className="flex flex-col items-center gap-2.5 md:items-start">
+              <ColumnTitle>Informations</ColumnTitle>
               {legalLinks.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="link-underline transition-colors hover:text-paper"
+                  className="link-underline w-fit text-sm text-paper/80 transition-colors duration-300 hover:text-paper"
                 >
                   {item.label}
                 </Link>
               ))}
             </nav>
           </div>
+
+          <div className="h-px w-full bg-paper/20" />
+
+          <p className="pt-8 text-center text-sm text-paper/80">
+            © {year} Fablioo — Alexandre-Philippe Perez. Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>
