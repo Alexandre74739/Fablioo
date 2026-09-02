@@ -26,11 +26,31 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://fablioo.com"),
   title: "Fablioo",
   description:
-    "Derrière chaque interface se cache un récit qu'on ne lit pas, mais qu'on ressent.",
+    "Studio de design et de création de sites web sur mesure à Grenoble et Saint-Martin-d'Hères : identité visuelle, site vitrine et développement pensés comme un récit, du premier échange à la mise en ligne.",
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Fablioo",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export const viewport: Viewport = {
   colorScheme: "only light",
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://fablioo.com/#website",
+  url: "https://fablioo.com",
+  name: "Fablioo",
+  description:
+    "Studio de design et de création de sites web sur mesure à Grenoble et Saint-Martin-d'Hères.",
+  inLanguage: "fr-FR",
+  publisher: { "@id": "https://fablioo.com/#business" },
 };
 
 export default function RootLayout({
@@ -44,6 +64,12 @@ export default function RootLayout({
       className={`${archivoBlack.variable} ${sourceSerif.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <Header />
         {children}
         <Footer />

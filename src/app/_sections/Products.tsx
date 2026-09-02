@@ -69,8 +69,9 @@ export default function Products() {
                 Des idées qui vous ressemblent
               </h2>
               <p className="mt-4 text-lg md:text-xl">
-                Chaque projet est une histoire à découvrir, et Fablioo vous
-                accompagne dans cette aventure.
+                Logo, identité visuelle ou site web sur mesure : chaque projet
+                est une histoire à découvrir, et Fablioo vous accompagne à chaque
+                chapitre.
               </p>
             </div>
           </Reveal>

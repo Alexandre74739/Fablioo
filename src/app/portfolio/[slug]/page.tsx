@@ -47,7 +47,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <main>
         <ProjectHero
           breadcrumb={[
-            { label: "Agence", href: "/" },
+            { label: "Studio", href: "/" },
             { label: "Portfolio", href: "/portfolio" },
             { label: project.title },
           ]}

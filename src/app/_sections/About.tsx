@@ -111,10 +111,7 @@ export default function About() {
                   </strong>
                   , la vôtre, celle de votre métier, de vos clients, de ce qui
                   vous rend différent.
-                </p>
-              </Reveal>
-              <Reveal delay={0.4}>
-                <p className="max-w-2xl">
+                  <br />
                   Une fois pour{" "}
                   <strong className="text-paper">
                     {" "}
@@ -122,6 +119,14 @@ export default function About() {
                   </strong>{" "}
                   : un site pensé comme un récit, où chaque écran est une page
                   qu'on a envie de tourner.
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.4}>
+                <p className="max-w-2xl">
+                  Basé à Saint-Martin-d'Hères, Fablioo crée vos identités
+                  visuelles et sites web sur mesure partout dans
+                  la région de <strong className="text-paper">Grenoble</strong>.
                 </p>
               </Reveal>
             </div>
