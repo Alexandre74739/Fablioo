@@ -43,7 +43,11 @@ export default function Hero({
       className="relative flex min-h-svh w-full items-center overflow-hidden bg-paper"
     >
       <PaperTexture />
-      <WordField y={reduce ? 0 : wordY} opacity={reduce ? 1 : wordOpacity} />
+      <WordField
+        y={reduce ? 0 : wordY}
+        opacity={reduce ? 1 : wordOpacity}
+        reduce={reduce}
+      />
 
       <div
         aria-hidden="true"
