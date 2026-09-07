@@ -78,7 +78,7 @@ export default function Hero({ content }: HeroProps) {
           className="pointer-events-none absolute inset-0 z-34 bg-[radial-gradient(72%_58%_at_28%_46%,rgba(247,241,230,0.74),rgba(247,241,230,0)_72%)]"
         />
 
-        <div className="absolute inset-0 z-35 flex items-center">
+        <div className="absolute inset-0 z-35 flex -translate-y-8 items-center xl:translate-y-0">
           <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-6 py-16 text-center md:items-start md:px-10 md:py-24 md:text-left lg:flex-row lg:items-center lg:gap-16 lg:py-0">
             <Reveal delay={0.2} className="hidden shrink-0 lg:order-2 lg:block">
               <Image
@@ -102,7 +102,7 @@ export default function Hero({ content }: HeroProps) {
               </Reveal>
 
               <Reveal delay={0.4}>
-                <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed font-medium text-encre/80 md:mx-0 md:mt-7 md:text-lg lg:text-xl">
+                <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed font-medium text-encre/80 md:mx-0 md:mt-7 md:text-lg lg:mt-6 xl:text-xl">
                   Fablioo est un studio de design et de création web près de
                   Grenoble. On imagine votre identité visuelle et votre site
                   vitrine sur mesure, comme on écrirait un récit.
@@ -110,7 +110,7 @@ export default function Hero({ content }: HeroProps) {
               </Reveal>
 
               <Reveal delay={0.6}>
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:mt-9 md:justify-start">
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:mt-8 md:justify-start lg:mt-7 xl:mt-9">
                   <Button content={content} href="/services" style="primary" />
                   <Button
                     content="Feuilleter le portfolio"
