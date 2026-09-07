@@ -117,10 +117,7 @@ export default function Home() {
         }}
       />
       <main>
-        <Hero
-          quote="Derrière chaque histoire il devrait y avoir un site internet qui la raconte"
-          content="Découvrez nos services"
-        />
+        <Hero content="Découvrez nos services" />
         <About />
         <Products />
         <Process />
