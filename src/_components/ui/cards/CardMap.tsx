@@ -50,11 +50,11 @@ export default function CardMap({
             : "pr-18 text-left sm:pr-22 md:pr-26"
         }`}
       >
-        <h3 className="text-sm font-bold text-encre sm:text-base md:text-lg lg:text-xl">
+        <h3 className="text-base font-bold text-encre sm:text-base md:text-lg lg:text-xl">
           {title}
         </h3>
         <p
-          className={`mt-1.5 text-xs leading-snug text-encre/80 sm:mt-2 sm:text-sm md:text-base ${
+          className={`mt-1.5 leading-snug text-encre/80 sm:mt-2 text-sm md:text-base ${
             lines ? clampClasses[lines] : ""
           }`}
         >
