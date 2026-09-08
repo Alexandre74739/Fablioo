@@ -1,5 +1,3 @@
-"use client";
-
 import FloatingBlob from "@/_components/animations/FloatingBlob";
 import PawTrail from "@/_components/animations/PawTrail";
 import Reveal from "@/_components/animations/Reveal";

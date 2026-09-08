@@ -15,11 +15,7 @@ const contactJsonLd = {
   "@type": "ContactPage",
   mainEntity: {
     "@type": "ProfessionalService",
-    "@id": "https://fablioo.com",
-    sameAs: [
-      "https://github.com/Alexandre74739",
-      "https://linkedin.com/in/alexandre74739",
-    ],
+    "@id": "https://fablioo.com/#business",
   },
 };
 

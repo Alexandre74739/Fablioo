@@ -1,11 +1,7 @@
-"use client";
-
-import { useRef, useState } from "react";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
 import FloatingBlob from "@/_components/animations/FloatingBlob";
 import Reveal from "@/_components/animations/Reveal";
-import AccordionItem from "@/_components/ui/AccordionItem";
+import FaqRaven from "@/app/_sections/dynamic/FaqRaven";
+import FaqList from "@/app/_sections/dynamic/FaqList";
 
 const faqs: { id: string; question: string; answer: string }[] = [
   {
@@ -55,17 +51,8 @@ const faqJsonLd = {
 };
 
 export default function Faq() {
-  const [openId, setOpenId] = useState<string | null>(null);
-
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const ravenX = useTransform(scrollYProgress, [0, 1], [60, -120]);
-
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-paper">
+    <section className="relative overflow-hidden bg-paper">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -96,19 +83,7 @@ export default function Faq() {
         rotateRange={5}
       />
 
-      <motion.div
-        style={{ x: ravenX }}
-        className="hidden lg:block pointer-events-none absolute z-0 -right-40 top-0 w-md xl:w-lg xl:-right-44"
-        aria-hidden="true"
-      >
-        <Image
-          src="/illustrations/raven.svg"
-          alt=""
-          width={430}
-          height={402}
-          className="h-auto w-full"
-        />
-      </motion.div>
+      <FaqRaven />
 
       <div className="container relative z-10 mx-auto max-w-6xl px-4 py-16 md:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
@@ -126,21 +101,7 @@ export default function Faq() {
             </Reveal>
           </div>
 
-          <div className="flex flex-col gap-4 lg:col-span-12">
-            {faqs.map((faq, i) => (
-              <Reveal key={faq.id} delay={i * 0.1}>
-                <AccordionItem
-                  id={faq.id}
-                  question={faq.question}
-                  answer={faq.answer}
-                  isOpen={openId === faq.id}
-                  onToggle={() =>
-                    setOpenId((current) => (current === faq.id ? null : faq.id))
-                  }
-                />
-              </Reveal>
-            ))}
-          </div>
+          <FaqList faqs={faqs} />
         </div>
       </div>
     </section>

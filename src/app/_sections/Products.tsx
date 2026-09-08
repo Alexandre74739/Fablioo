@@ -1,26 +1,10 @@
-"use client";
-
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
 import FloatingBlob from "@/_components/animations/FloatingBlob";
 import Reveal from "@/_components/animations/Reveal";
 import PawTrail from "@/_components/animations/PawTrail";
 import Card from "@/_components/ui/cards/Card";
+import WaveDivider from "@/_components/animations/WaveDivider";
 
 export default function Products() {
-  const waveRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: waveRef,
-    offset: ["start end", "end start"],
-  });
-  const waveMaxTranslate = 100;
-  const waveY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [waveMaxTranslate, -waveMaxTranslate],
-  );
-
   return (
     <section className="relative overflow-hidden bg-sand/20">
       <div className="relative">
@@ -117,22 +101,10 @@ export default function Products() {
         </div>
       </div>
 
-      <motion.div
-        ref={waveRef}
-        style={{ y: waveY }}
-        className="relative z-10 mt-16 h-32 sm:h-40 md:mt-8 md:h-48 lg:h-56"
-      >
-        <Image
-          src="/shapes/wave-divider-products.svg"
-          alt=""
-          fill
-          className="object-cover object-bottom"
-        />
-        <div
-          className="absolute inset-x-0 bg-[#f7f1e6]"
-          style={{ top: "calc(100% - 2px)", height: waveMaxTranslate + 2 }}
-        />
-      </motion.div>
+      <WaveDivider
+        src="/shapes/wave-divider-products.svg"
+        fillerClassName="bg-[#f7f1e6]"
+      />
     </section>
   );
 }

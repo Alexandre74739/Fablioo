@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion, useDragControls } from "motion/react";
 import { X } from "lucide-react";
@@ -27,6 +28,14 @@ function useIsMobile() {
   return isMobile;
 }
 
+function useMounted() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+}
+
 export default function CardMap({
   isOpen,
   onClose,
@@ -36,6 +45,7 @@ export default function CardMap({
 }: CardMapProps) {
   const isMobile = useIsMobile();
   const dragControls = useDragControls();
+  const mounted = useMounted();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -63,7 +73,9 @@ export default function CardMap({
     };
   }, [isOpen]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -162,6 +174,7 @@ export default function CardMap({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

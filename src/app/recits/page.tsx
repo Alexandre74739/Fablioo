@@ -27,7 +27,7 @@ const recitsJsonLd = {
     "Derrière chaque interface se cache un récit qu'on ne lit pas, mais qu'on ressent : inspirations, coulisses et étapes clés de Fablioo.",
   publisher: {
     "@type": "Organization",
-    "@id": "https://fablioo.com",
+    "@id": "https://fablioo.com/#business",
     name: "Fablioo",
   },
   hasPart: [
