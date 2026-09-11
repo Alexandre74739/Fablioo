@@ -1,3 +1,4 @@
+import FloatingBlob from "@/_components/animations/FloatingBlob";
 import StoryPath from "./StoryPath";
 import StoryPartSection, {
   GRID,
@@ -40,6 +41,28 @@ export default function ProjectStory({
   return (
     <div className="relative pt-16 md:pt-24">
       <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <FloatingBlob
+          src="/shapes/blob-3.svg"
+          className="-left-24 top-1/4 h-56 w-56 md:h-80 md:w-80"
+          duration={8}
+          delay={0.2}
+          yRange={16}
+          rotateRange={5}
+        />
+        <FloatingBlob
+          src="/shapes/blob-4.svg"
+          className="-right-20 top-2/3 h-52 w-52 md:h-72 md:w-72"
+          duration={9}
+          delay={0.6}
+          yRange={-16}
+          rotateRange={-5}
+        />
+      </div>
+
+      <div
         className="pointer-events-none absolute inset-0 hidden md:block"
         aria-hidden="true"
       >
@@ -54,9 +77,11 @@ export default function ProjectStory({
         </div>
       </div>
 
-      {parts.map((part) => (
-        <StoryPartSection key={part.number} {...part} />
-      ))}
+      <div className="relative z-10">
+        {parts.map((part) => (
+          <StoryPartSection key={part.number} {...part} />
+        ))}
+      </div>
     </div>
   );
 }

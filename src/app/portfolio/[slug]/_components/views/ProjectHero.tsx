@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/_components/animations/Reveal";
+import FloatingBlob from "@/_components/animations/FloatingBlob";
 import ArianeFil, { type BreadcrumbItem } from "@/_components/ui/ArianeFil";
 import ProjectMeta from "./ProjectMeta";
 
@@ -24,6 +25,22 @@ export default function ProjectHero({
 }: ProjectHeroProps) {
   return (
     <section className="relative overflow-hidden bg-paper pt-32 pb-16 md:pt-40 md:pb-20">
+      <FloatingBlob
+        src="/shapes/blob-1.svg"
+        className="-left-20 top-8 h-40 w-40 md:h-56 md:w-56"
+        duration={8}
+        yRange={14}
+        rotateRange={5}
+      />
+      <FloatingBlob
+        src="/shapes/blob-2.svg"
+        className="hidden sm:block -right-16 bottom-0 h-48 w-48 md:h-64 md:w-64"
+        duration={9}
+        delay={0.5}
+        yRange={-16}
+        rotateRange={-5}
+      />
+
       <div className="container relative z-10 mx-auto max-w-6xl px-4">
         <Reveal>
           <ArianeFil items={breadcrumb} />
