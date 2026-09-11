@@ -1,26 +1,10 @@
-"use client";
-
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
 import FloatingBlob from "@/_components/animations/FloatingBlob";
 import PawTrail from "@/_components/animations/PawTrail";
 import Reveal from "@/_components/animations/Reveal";
+import BranchesDivider from "@/_components/animations/BranchesDivider";
 import PricingCard from "@/_components/ui/cards/PricingCard";
 
 export default function WebOffers() {
-  const branchesRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: branchesRef,
-    offset: ["start end", "end start"],
-  });
-  const branchesMaxTranslate = 40;
-  const branchesY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [branchesMaxTranslate, -branchesMaxTranslate],
-  );
-
   return (
     <section id="site-web" className="relative z-10">
       <div className="relative overflow-hidden bg-prune px-4 pt-16 pb-16 md:px-8 md:pt-24 md:pb-24">
@@ -146,26 +130,7 @@ export default function WebOffers() {
         </div>
       </div>
 
-      <motion.div
-        ref={branchesRef}
-        style={{ y: branchesY }}
-        className="relative -mb-8 aspect-1516/111 w-full md:-mb-6"
-        aria-hidden="true"
-      >
-        <div
-          className="absolute inset-x-0 bg-prune"
-          style={{
-            bottom: "calc(100% - 2px)",
-            height: branchesMaxTranslate + 2,
-          }}
-        />
-        <Image
-          src="/parallaxe/Branches.svg"
-          alt=""
-          fill
-          className="object-contain"
-        />
-      </motion.div>
+      <BranchesDivider />
     </section>
   );
 }

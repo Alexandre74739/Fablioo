@@ -19,7 +19,7 @@ const servicesJsonLd = {
   serviceType: "Création de sites web et identité visuelle",
   provider: {
     "@type": "ProfessionalService",
-    "@id": "https://fablioo.com",
+    "@id": "https://fablioo.com/#business",
     name: "Fablioo",
   },
   areaServed: ["Saint-Martin-d'Hères", "Grenoble", "Isère"],

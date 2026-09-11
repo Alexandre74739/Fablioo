@@ -1,12 +1,9 @@
-"use client";
-
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
 import Reveal from "@/_components/animations/Reveal";
 import FloatingBlob from "@/_components/animations/FloatingBlob";
 import PawTrail from "@/_components/animations/PawTrail";
+import WaveDivider from "@/_components/animations/WaveDivider";
 import Button from "@/_components/ui/Button";
+import ProloguePhoto from "./dynamic/ProloguePhoto";
 
 interface PrologueProps {
   title: string;
@@ -19,30 +16,8 @@ export default function Prologue({
   content,
   secondaryContent,
 }: PrologueProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const photoY = useTransform(scrollYProgress, [0, 1], [32, -32]);
-
-  const waveRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: waveProgress } = useScroll({
-    target: waveRef,
-    offset: ["start end", "end start"],
-  });
-  const waveMaxTranslate = 100;
-  const waveY = useTransform(
-    waveProgress,
-    [0, 1],
-    [waveMaxTranslate, -waveMaxTranslate],
-  );
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative flex min-h-dvh flex-col overflow-hidden"
-    >
+    <section className="relative flex min-h-dvh flex-col overflow-hidden">
       <div
         className="pointer-events-none absolute -right-10 top-10 hidden h-140 w-56 -scale-x-100 opacity-70 lg:block"
         aria-hidden="true"
@@ -77,39 +52,7 @@ export default function Prologue({
       <div className="container relative z-10 mx-auto flex max-w-6xl flex-1 flex-col justify-center px-4 pt-28 pb-16 md:pt-16 md:pb-24">
         <div className="grid grid-cols-1 items-center gap-12 md:gap-16 lg:grid-cols-[3fr_2fr] lg:gap-20">
           <Reveal delay={0.6} className="lg:order-2">
-            <motion.div
-              style={{ y: photoY }}
-              className="relative mx-auto w-80 md:w-104"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute -inset-4 rotate-6 rounded-[3rem] bg-prune/10 md:-inset-6"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute -inset-1 -rotate-3 rounded-[3rem] bg-sand/50 md:-inset-2"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute -inset-3 rounded-full border border-dashed border-rosewood/30 md:-inset-5"
-              />
-              <div
-                className="relative z-10 m-8 aspect-square overflow-hidden shadow-xl md:m-12"
-                style={{ borderRadius: "63% 37% 54% 46% / 43% 37% 63% 57%" }}
-              >
-                <Image
-                  src="/illustrations/image de profil.jpg"
-                  alt="Alexandre, fondateur de Fablioo"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full bg-paper px-4 py-1.5 shadow-md ring-1 ring-rosewood/15 md:-bottom-4">
-                <span className="font-heading text-xs font-bold tracking-wide text-rosewood uppercase whitespace-nowrap md:text-sm">
-                  Fondateur de Fablioo
-                </span>
-              </div>
-            </motion.div>
+            <ProloguePhoto />
           </Reveal>
 
           <div className="text-left px-4 py-16 lg:order-1">
@@ -154,22 +97,10 @@ export default function Prologue({
         </div>
       </div>
 
-      <motion.div
-        ref={waveRef}
-        style={{ y: waveY }}
-        className="relative z-10 mt-16 h-32 sm:h-40 md:mt-8 md:h-48 lg:h-56"
-      >
-        <Image
-          src="/shapes/wave-divider-products.svg"
-          alt=""
-          fill
-          className="object-cover object-bottom"
-        />
-        <div
-          className="absolute inset-x-0 bg-paper"
-          style={{ top: "calc(100% - 2px)", height: waveMaxTranslate + 2 }}
-        />
-      </motion.div>
+      <WaveDivider
+        src="/shapes/wave-divider-products.svg"
+        fillerClassName="bg-paper"
+      />
     </section>
   );
 }

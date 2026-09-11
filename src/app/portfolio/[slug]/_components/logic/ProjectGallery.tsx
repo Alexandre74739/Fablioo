@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Reveal from "@/_components/animations/Reveal";
+import FloatingBlob from "@/_components/animations/FloatingBlob";
 import NavButton from "@/_components/ui/NavButton";
 
 interface ProjectGalleryProps {
@@ -77,6 +78,23 @@ export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
 
   return (
     <section className="relative overflow-hidden mb-16 md:mb-8">
+      <FloatingBlob
+        src="/shapes/blob-4.svg"
+        className="hidden sm:block -left-24 top-0 h-52 w-52 md:h-72 md:w-72"
+        duration={8}
+        delay={0.4}
+        yRange={14}
+        rotateRange={5}
+      />
+      <FloatingBlob
+        src="/shapes/blob-3.svg"
+        className="-right-20 bottom-0 h-56 w-56 md:h-80 md:w-80"
+        duration={9}
+        delay={0.8}
+        yRange={-16}
+        rotateRange={-6}
+      />
+
       <div className="container relative z-10 mx-auto flex max-w-6xl flex-col gap-14 px-4">
         {images.length > 0 && (
           <Reveal>
