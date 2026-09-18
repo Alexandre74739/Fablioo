@@ -35,12 +35,13 @@ export default function Bandeau({
         <BandeauDecor />
 
         <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
-          <Reveal delay={0}>
+          <Reveal delay={0} className="pointer-events-none">
             <Image
               src="/logo/logo-icone.svg"
               alt=""
               width={103}
               height={84}
+              draggable={false}
               className="h-16 w-auto md:h-20"
             />
           </Reveal>

@@ -80,12 +80,13 @@ export default function Footer() {
       <motion.div
         ref={grassRef}
         style={{ y: grassY }}
-        className="relative -mb-1 aspect-1440/314 w-full"
+        className="pointer-events-none relative -mb-1 aspect-1440/314 w-full"
       >
         <Image
           src="/parallaxe/Grass.svg"
           alt=""
           fill
+          draggable={false}
           className="object-contain"
         />
       </motion.div>

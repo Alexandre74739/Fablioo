@@ -45,6 +45,7 @@ export default function Hero({
             alt=""
             fill
             preload
+            draggable={false}
             className="object-cover object-top"
           />
         </motion.div>
@@ -58,6 +59,7 @@ export default function Hero({
             alt=""
             fill
             preload
+            draggable={false}
             className="object-cover object-top"
           />
         </motion.div>
@@ -69,6 +71,7 @@ export default function Hero({
               alt=""
               width={1280}
               height={630}
+              draggable={false}
               className="h-auto w-full"
             />
             {/* Aplat qui traîne sous Forêt : comble l'espace qu'elle laisse
@@ -123,6 +126,7 @@ export default function Hero({
               alt=""
               width={1280}
               height={297}
+              draggable={false}
               className="h-auto w-full"
             />
             {/* Aplat qui traîne sous Pierre : comble l'espace qu'elle laisse

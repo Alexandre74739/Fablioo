@@ -87,6 +87,7 @@ export default function Hero({
             alt=""
             width={1280}
             height={297}
+            draggable={false}
             className="h-auto w-full"
           />
           <div

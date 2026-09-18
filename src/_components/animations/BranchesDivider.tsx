@@ -22,7 +22,7 @@ export default function BranchesDivider() {
     <motion.div
       ref={ref}
       style={{ y }}
-      className="relative -mb-8 aspect-1516/111 w-full md:-mb-6"
+      className="pointer-events-none relative -mb-8 aspect-1516/111 w-full md:-mb-6"
       aria-hidden="true"
     >
       {/* comble l'espace entre le bloc prune et les branches quand elles montent */}
@@ -34,6 +34,7 @@ export default function BranchesDivider() {
         src="/parallaxe/Branches.svg"
         alt=""
         fill
+        draggable={false}
         className="object-contain"
       />
     </motion.div>

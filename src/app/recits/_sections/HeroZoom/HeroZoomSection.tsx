@@ -95,7 +95,7 @@ export default function HeroZoomSection({
       <motion.div
         ref={branchesRef}
         style={{ y: branchesY }}
-        className="relative z-10 -mb-8 aspect-1516/111 w-full md:-mb-6"
+        className="pointer-events-none relative z-10 -mb-8 aspect-1516/111 w-full md:-mb-6"
         aria-hidden="true"
       >
         <div
@@ -109,6 +109,7 @@ export default function HeroZoomSection({
           src="/parallaxe/Branches.svg"
           alt=""
           fill
+          draggable={false}
           className="object-contain"
         />
       </motion.div>
