@@ -78,10 +78,10 @@ export default function Hero({ content }: HeroProps) {
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-34 bg-[radial-gradient(72%_58%_at_28%_46%,rgba(247,241,230,0.74),rgba(247,241,230,0)_72%)]"
+          className="pointer-events-none absolute inset-0 z-25 bg-[radial-gradient(72%_58%_at_28%_46%,rgba(247,241,230,0.74),rgba(247,241,230,0)_72%)]"
         />
 
-        <div className="absolute inset-0 z-35 flex -translate-y-8 flex-col items-center justify-center gap-6 px-6 text-center xl:translate-y-0">
+        <div className="absolute inset-0 z-26 flex -translate-y-8 flex-col items-center justify-center gap-6 px-6 text-center xl:translate-y-0">
           <Reveal delay={0.2}>
             <h1 className="max-w-4xl text-3xl text-encre sm:text-4xl md:text-5xl lg:text-6xl">
               Un site web sur mesure qui raconte{" "}
