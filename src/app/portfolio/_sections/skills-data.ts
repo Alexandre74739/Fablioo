@@ -128,6 +128,15 @@ export const SKILLS: Skill[] = [
     ],
   },
   {
+    id: "sql",
+    label: "SQL",
+    description: "Des données bien rangées et faciles à retrouver.",
+    details: [
+      "SQL est le langage des bases de données relationnelles comme PostgreSQL ou MySQL. Je conçois des tables bien pensées et des requêtes efficaces, pour que vos données restent cohérentes et s'affichent rapidement.",
+      "Pourquoi c'est important selon moi : une base de données mal structurée finit toujours par ralentir un site. Bien la concevoir dès le départ, c'est s'éviter des migrations douloureuses plus tard.",
+    ],
+  },
+  {
     id: "prisma",
     label: "Prisma",
     description: "Une base de données modélisée sans friction.",
