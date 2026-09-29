@@ -65,6 +65,33 @@ export const SKILLS: Skill[] = [
     ],
   },
   {
+    id: "nuxt",
+    label: "Nuxt",
+    description: "Des sites Vue.js rapides et bien référencés.",
+    details: [
+      "Nuxt est l'équivalent de Next.js dans l'univers Vue.js : rendu côté serveur, pages rapides et SEO soigné, avec une approche plus douce qui convient parfaitement à certains projets.",
+      "Pourquoi c'est important selon moi : je ne veux pas imposer un outil par habitude. Si votre projet ou votre équipe vit déjà dans l'écosystème Vue, je m'y adapte plutôt que de tout reconstruire.",
+    ],
+  },
+  {
+    id: "php",
+    label: "PHP",
+    description: "Le langage qui fait tourner une grande partie du web.",
+    details: [
+      "PHP propulse une immense partie des sites en ligne, de WordPress aux applications métier. Je sais le lire, le maintenir et le faire évoluer, que ce soit pour un nouveau projet ou pour reprendre un existant.",
+      "Pourquoi c'est important selon moi : beaucoup de sites reposent déjà sur PHP. Savoir travailler avec, c'est pouvoir améliorer votre site actuel sans vous obliger à repartir de zéro.",
+    ],
+  },
+  {
+    id: "symfony",
+    label: "Symfony",
+    description: "Un back-end solide pour les projets ambitieux.",
+    details: [
+      "Symfony structure les applications PHP autour de bonnes pratiques éprouvées : routes claires, sécurité intégrée et code organisé, idéal pour des back-offices, des API ou des plateformes sur mesure.",
+      "Pourquoi c'est important selon moi : quand un projet prend de l'ampleur, un cadre robuste fait toute la différence. Il permet d'ajouter des fonctionnalités sans que l'ensemble devienne fragile.",
+    ],
+  },
+  {
     id: "typescript",
     label: "TypeScript",
     description: "Un code fiable, sans mauvaise surprise.",
