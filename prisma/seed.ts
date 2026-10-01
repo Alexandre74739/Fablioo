@@ -31,6 +31,20 @@ const projects: Prisma.ProjectUncheckedCreateInput[] = [
     siteUrl: "https://echiquier-martinerois.com/",
     createdAt: new Date("2026-07-14T22:00:00.000Z"),
   },
+  {
+    id: 3,
+    slug: "ticawa",
+    title: "Ticawa",
+    tag: "Application mobile (PWA)",
+    description:
+      "Ticawa conserve vos preuves d'achat, indique quelles garanties et assurances couvrent chaque produit et jusqu'à quand, puis vous prévient avant leur expiration. Perdez votre ticket, jamais vos droits.",
+    details:
+      "Ticawa part d'un constat tout bête : un ticket de caisse se perd bien avant la fin de la garantie, et sans preuve d'achat, la demande au SAV s'arrête là. L'application se glisse dans la poche, s'installe en un clic depuis le navigateur sur iPhone comme sur Android, et numérise chaque ticket ou facture directement sur le téléphone. Elle calcule ensuite les garanties qui couvrent le produit et envoie une notification avant l'échéance. Le tout pensé RGPD-frendly dès la conception : données hébergées en Europe, prestataires français en priorité, aucune ressource tierce chargée par les pages, et un coût de fonctionnement de 0 €. Une mascotte, Tico, accompagne l'utilisateur et réagit même aux gestes de la souris sur la page d'accueil.",
+    tech: ["Nuxt", "Tailwind CSS", "PostgreSQL", "PWA", "Figma", "Tesseract.js"],
+    image: "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/ticawa/cover.png",
+    siteUrl: "https://ticawa.vercel.app/",
+    createdAt: new Date("2026-09-30T22:00:00.000Z"),
+  },
 ];
 
 const specifiqueProjects: Prisma.SpecifiqueProjectUncheckedCreateInput[] = [
@@ -93,6 +107,38 @@ const specifiqueProjects: Prisma.SpecifiqueProjectUncheckedCreateInput[] = [
       "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/echiquier-martinerois/illustration1.png",
       "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/echiquier-martinerois/illustration2.png",
       "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/echiquier-martinerois/illustration3.png",
+    ],
+  },
+  {
+    id: 3,
+    projectId: 3,
+    contexte:
+      "Qui garde encore ses tickets de caisse ? Et parmi ceux qui les gardent, qui sait que la garantie légale de conformité couvre deux ans, ou qu'une assurance casse souscrite le jour de l'achat court toujours ? Les droits existent, mais on les oublie, et je parle même pas de la preuve d'achat. Ticawa est né pour réunir tout cela au même endroit : les justificatifs, les garanties qui en découlent, et un rappel au bon moment.",
+    objectifs:
+      "Le projet reposait sur quatre objectifs. D'abord, numériser un ticket ou une facture PDF en une photo, avec une lecture automatique de la date, du prix et du magasin. Ensuite, afficher pour chaque produit les garanties et assurances qui le couvrent et leur date de fin, sans jargon juridique. Puis prévenir avant l'échéance, par notification sur le téléphone ou par e-mail. Enfin, une ligne rouge : informer et alerter, sans jamais faire de démarche à la place de l'utilisateur ni inventer un droit qui n'existe pas.",
+    cibles:
+      "Les 25-34 ans qui achètent régulièrement de l'électroménager, de l'électronique ou du mobilier, et qui veulent faire valoir leurs droits sans passer des heures à chercher une facture ou un article de loi.",
+    contraintes:
+      "Un cahier des charges exigeant : souveraineté et RGPD dès la conception (données dans l'UE, polices auto-hébergées, aucun appel externe qui ferait fuiter l'IP des visiteurs, export et suppression du compte à tout moment), un coût de 0 € en outils gratuits et open source, et une application mobile d'abord, prête à être empaquetée plus tard pour les stores avec Capacitor. La lecture des tickets devait donc tourner sur le téléphone lui-même (OCR en WebAssembly), et la sécurité être solide : protection CSRF, limitation de débit, sessions révocables, mots de passe hachés.",
+    resultats:
+      "Ticawa est une application complète, installable sur iPhone et Android directement depuis le navigateur donc venez vite la découvrir : scan des tickets sur l'appareil, suivi des garanties, notifications push, connexion par e-mail ou Google, et un espace compte qui respecte pleinement vos droits RGPD. Le tout pour un coût de fonctionnement nul, avec une identité visuelle douce et ludique portée par Tico, la mascotte créer entièrement sur Figma.",
+    avant: [
+      "Des preuves d'achats qui se perdent en quelques mois, bien avant la fin de la garantie.",
+      "Des garanties légales et des assurances méconnues, donc rarement utilisées.",
+      "Des factures éparpillées entre différents supports.",
+    ],
+    apres: [
+      "Chaque preuve d'achat numérisée en une photo, lue directement sur le téléphone.",
+      "Les garanties et assurances de chaque produit affichées avec leur date de fin.",
+      "Une notification avant l'échéance, pour ne plus jamais laisser filer un droit.",
+      "Des données hébergées en Europe, exportables et supprimables à tout moment.",
+    ],
+    illustrations: [
+      "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/ticawa/illustration1.png",
+      "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/ticawa/illustration2.png",
+      "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/ticawa/illustration3.png",
+      "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/ticawa/illustration4.png",
+      "https://pdwdmf7lgeoiai9c.public.blob.vercel-storage.com/ticawa/illustration5.png",
     ],
   },
 ];

@@ -18,7 +18,11 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
   return (
     <div className="mt-12 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2">
       {projects.map((project, index) => (
-        <Reveal key={project.id} delay={0.1 * (index % 2)}>
+        <Reveal
+          key={project.id}
+          delay={0.1 * (index % 2)}
+          className="md:last:odd:col-span-2 md:last:odd:mx-auto md:last:odd:w-[calc(50%-1rem)]"
+        >
           <ProjectCard
             slug={project.slug}
             image={project.image}
