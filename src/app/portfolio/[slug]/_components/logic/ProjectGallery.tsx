@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Reveal from "@/_components/animations/Reveal";
 import FloatingBlob from "@/_components/animations/FloatingBlob";
 import NavButton from "@/_components/ui/NavButton";
+import Lightbox from "@/_components/ui/modals/Lightbox";
 
 interface ProjectGalleryProps {
   images: string[];
@@ -13,11 +14,9 @@ interface ProjectGalleryProps {
 
 export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const closeLightbox = useCallback(() => setOpenIndex(null), []);
   const looping = images.length > 1;
-  // Clone the last slide before the first and the first slide after the last,
-  // so scrolling past an edge keeps moving in the same direction instead of
-  // snapping back to the start — the reset onto the real slide happens
-  // invisibly once the scroll settles on a clone.
   const slides = looping
     ? [images[images.length - 1], ...images, images[0]]
     : images;
@@ -131,10 +130,17 @@ export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
               className="no-scrollbar mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2"
             >
               {slides.map((src, i) => (
-                <div
+                <button
+                  type="button"
                   key={`${src}-${i}`}
                   data-gallery-slide
-                  className="relative aspect-video w-full shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg"
+                  onClick={() =>
+                    setOpenIndex(
+                      looping ? (i - 1 + images.length) % images.length : i,
+                    )
+                  }
+                  aria-label="Agrandir l'image"
+                  className="relative aspect-video w-full shrink-0 cursor-zoom-in snap-center overflow-hidden rounded-2xl bg-sand/40 shadow-lg"
                 >
                   <Image
                     src={src}
@@ -142,9 +148,9 @@ export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
                     fill
                     sizes="(min-width: 1024px) 1152px, 100vw"
                     quality={90}
-                    className="object-cover object-top"
+                    className="object-contain"
                   />
-                </div>
+                </button>
               ))}
             </div>
 
@@ -165,6 +171,14 @@ export default function ProjectGallery({ images, alt }: ProjectGalleryProps) {
           </Reveal>
         )}
       </div>
+
+      <Lightbox
+        images={images}
+        index={openIndex}
+        onClose={closeLightbox}
+        onIndexChange={setOpenIndex}
+        alt={alt}
+      />
     </section>
   );
 }

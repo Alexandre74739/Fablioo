@@ -19,7 +19,7 @@ Avant d'écrire un nouveau composant, chercher s'il existe déjà dans `src/_com
 
 - `_components/ui/` : briques d'interface génériques et non liées à une page — `Button`, `Input`, `Pagination`, `AccordionItem`, `NavButton`, `ArianeFil`, `ChapterNav`, `Pill`, `SkillsCarousel`, `SkillsCascade`.
 - `_components/ui/cards/` : familles de cartes réutilisables — `Card`, `ProjectCard`, `PricingCard`, `SkillCard`, `BeforeAfterCard`, `CardMap`.
-- `_components/ui/modals/` : modales génériques (`CardMap`, `Skill`).
+- `_components/ui/modals/` : modales génériques (`CardMap`, `Skill`, `Lightbox`).
 - `_components/animations/` : primitives de motion/décor réutilisées sur plusieurs pages — `Reveal`, `FloatingBlob`, `ChromaKeyVideo`, `PawTrail`, `ShaderWaves`.
 - `_components/layout/` : `Header` et `Footer`, montés une seule fois dans `src/app/layout.tsx`.
 - `_components/legal/` : `LegalLayout`, partagé par les pages `confidentialite`, `cookies`, `mentions-legales`.
