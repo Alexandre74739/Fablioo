@@ -93,7 +93,7 @@ export default function Hero({ content }: HeroProps) {
 
           <Reveal delay={0.4}>
             <p className="max-w-xl text-base leading-relaxed font-medium text-encre/80 md:text-lg lg:text-xl">
-              Fablioo est un studio de design et de création web près de
+              Fablioo est un studio de création de sites web et de design à
               Grenoble. On imagine votre identité visuelle et votre site
               vitrine sur mesure, comme on écrirait un récit.
             </p>

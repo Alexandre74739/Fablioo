@@ -80,7 +80,7 @@ export default function Epilogue() {
             Merci d'avoir tout lu
           </span>
           <span className="text-sm font-bold tracking-wide text-prune md:text-base">
-            Alexandre, fondateur de Fablioo
+            Perez Alexandre-Philippe, <br />fondateur de Fablioo
           </span>
         </Reveal>
       </div>

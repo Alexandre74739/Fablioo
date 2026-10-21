@@ -119,7 +119,8 @@ export default function Footer() {
               </Link>
               <address className="max-w-xs text-sm not-italic leading-relaxed text-paper/80">
                 Studio de design & création de sites web sur mesure à
-                Saint-Martin-d'Hères et Grenoble.
+                Saint-Martin-d'Hères et Grenoble, fondé par Alexandre-Philippe
+                Perez.
               </address>
               <div className="mt-1 flex items-center gap-3">
                 {socialLinks.map(({ label, href, Icon }) => (

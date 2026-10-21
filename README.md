@@ -28,6 +28,7 @@ DATABASE_URL=postgresql://...
 RESEND_API_KEY=...
 RESEND_FROM_EMAIL="Fablioo <contact@exemple.com>"   # optionnel
 RESEND_TO_EMAIL=destinataire@exemple.com             # optionnel
+GOOGLE_SITE_VERIFICATION=...                          # optionnel, code Google Search Console (balise meta)
 ```
 
 Puis appliquer le schéma et générer le client Prisma :

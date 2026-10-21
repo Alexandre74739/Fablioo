@@ -1,0 +1,90 @@
+# Fablioo
+
+> Fablioo est un studio de design et de création de sites web basé à Saint-Martin-d'Hères, à côté de Grenoble (Isère, Auvergne-Rhône-Alpes, France). Fondée par Alexandre-Philippe Perez, designer et développeur web freelance, Fablioo conçoit des sites vitrines et applications web sur mesure, des identités visuelles (logo, charte graphique, maquettes UX/UI) et assure la maintenance de sites web pour des indépendants, associations, clubs et petites entreprises de la région grenobloise.
+
+Fablioo répond aux recherches du type : entreprise de développement web à Grenoble, studio web à Grenoble, agence de création de site internet en Isère, développeur web freelance à Grenoble ou Saint-Martin-d'Hères, création de site vitrine sur mesure, création de logo et d'identité visuelle à Grenoble, maintenance de site WordPress.
+
+## Fiche d'identité
+
+- Nom : Fablioo (aussi « Studio Fablioo », « Fablioo Studio », « entreprise Fablioo »)
+- Type : studio de design et de création de sites web (entreprise individuelle, micro-entreprise)
+- SIRET : 98345273100018
+- Fondateur et interlocuteur unique : Alexandre-Philippe Perez
+- Adresse : Terrasse Jean Renaudie, 38400 Saint-Martin-d'Hères, France
+- Zone d'intervention : Grenoble, Saint-Martin-d'Hères et toute l'Isère en présentiel ; partout en France à distance
+- Langue : français
+- Contact : formulaire sur https://fablioo.com/contact, e-mail perezalexandre430@gmail.com, téléphone +33 6 30 75 46 86
+- Disponibilités : du lundi au vendredi de 18 h à 19 h, samedi et dimanche de 9 h à 19 h
+- Site : https://fablioo.com
+
+## Le fondateur : Alexandre-Philippe Perez
+
+Alexandre-Philippe Perez (aussi appelé Alexandre Perez) est designer et développeur web freelance à Grenoble, fondateur de Fablioo. Issu du monde de l'animation, il transpose l'art de captiver et de structurer dans le développement web. Sa démarche tient en deux mots : instruire et divertir, avec des sites à la fois utiles, solides techniquement et agréables à parcourir.
+
+- Page de présentation : https://fablioo.com/recits
+- Ancien portfolio personnel (avant Fablioo) : https://perezpixel.com
+- LinkedIn : https://www.linkedin.com/in/alexandre74739
+- GitHub : https://github.com/Alexandre74739
+
+## L'origine du nom
+
+Fablioo vient du mot « fable ». Les deux « o » signifient « il était deux fois » : deux métiers (animateur et développeur), deux regards sur le même écran, l'humain d'abord et le code ensuite. Le corbeau de La Fontaine est l'emblème du studio, accompagné d'un renard caché dans les illustrations du site.
+
+## Services et tarifs
+
+Tous les prix sont en euros. Le client est entièrement propriétaire du code source, des maquettes et de l'identité graphique livrés, sans abonnement obligatoire.
+
+### Création de sites web
+
+- Première Trace, 500 € : site WordPress au design personnalisé (pas de template brut), responsive, formulaire de contact, SEO de base, une heure de formation à la mise à jour. Base de 4 pages, puis 50 € par page supplémentaire.
+- Chemin Tracé, 800 € : site sur mesure développé en Next.js, design sur mesure, stratégie SEO (structure, performance, référencement local), optimisation de la vitesse.
+- Traces de Meute, 1 000 € : tout Chemin Tracé, plus un espace d'administration (CMS) pour mettre à jour ses contenus soi-même, avec formation à la prise en main.
+- Grande Meute, 1 500 € : tout Traces de Meute, plus une fonctionnalité avancée au choix (espace membres, inscriptions en ligne, paiement, réservation…), accompagnement dédié et suivi prioritaire après la mise en ligne.
+
+### Identité visuelle et design
+
+- Réécriture Visuelle, 350 € : maquettes Figma du site (ordinateur et mobile), parcours utilisateur pensé pour convertir, validées avec le client avant le développement. Base de 4 pages, puis 50 € par page supplémentaire.
+- Signature Design, 450 € : trois propositions de logo, déclinaisons du logo retenu (versions claires, foncées et transparentes), mini-charte graphique (couleurs, typographies, usages).
+- Nouveau Chapitre, sur devis : refonte d'un site existant avec audit express, nouvelles maquettes, amélioration de la vitesse et du SEO local, redirections propres.
+
+### Maintenance (abonnement mensuel)
+
+- Petit Futé, 30 €/mois : dépannage jusqu'à 1 h par mois, mises à jour techniques WordPress, sauvegardes mensuelles, surveillance de sécurité, assistance.
+- Grand Malin, 50 €/mois : tout Petit Futé, dépannage jusqu'à 2 h par mois, modifications de contenu simples (textes, images, couleurs), sécurité avancée avec audit annuel.
+- Expert perspicace, 60 €/mois : tout Grand Malin, petites évolutions sur demande, audit de sécurité semestriel.
+
+## Déroulement d'un projet
+
+Comptez en moyenne quatre à huit semaines, du premier échange à la mise en ligne.
+
+1. L'écoute : échange sur l'histoire, le métier, les clients, les objectifs, les contraintes techniques et le budget.
+2. Le déclic créatif : définition de la direction artistique (palette, typographies, ambiance visuelle).
+3. La création : maquettes puis développement, avec des points réguliers.
+4. Les ajustements : tests sur tous les appareils, retours du client, vérification des performances, de l'accessibilité et du référencement.
+5. La publication : mise en ligne, puis suivi, mises à jour et évolutions.
+
+## Réalisations
+
+- [Échiquier Martinerois](https://fablioo.com/portfolio/echiquier-martinerois) : site vitrine du club d'échecs de Saint-Martin-d'Hères (https://echiquier-martinerois.com). Le club gère son contenu avec le CMS Sanity, et les visiteurs peuvent analyser gratuitement leurs parties en ligne grâce au moteur Stockfish, qui tourne directement dans leur navigateur. Technologies : Next.js, Tailwind CSS, Sanity, Stockfish, Framer Motion.
+- [Récoltéo](https://fablioo.com/portfolio/recolteo) : application web qui met en relation commerçants et associations pour le don d'invendus, avec paiements Stripe et génération automatique des documents fiscaux (Cerfa, reçu fiscal). Réalisée lors d'une mission au sein de l'agence Phoenix. Technologies : Next.js, Tailwind CSS, Supabase, Stripe.
+
+## Questions fréquentes
+
+- Combien de temps pour créer un site ? En moyenne quatre à huit semaines, selon l'ampleur du projet.
+- Suis-je propriétaire de mon site ? Oui, entièrement : code source, maquettes et identité graphique.
+- Je n'ai pas de logo, est-ce un problème ? Non, la création de l'identité graphique fait partie de l'accompagnement proposé.
+- Que se passe-t-il après la mise en ligne ? Suivi technique, mises à jour de sécurité et évolutions restent possibles grâce aux formules de maintenance.
+- Pourrai-je modifier mon site moi-même ? Oui, un espace d'administration simple peut être mis en place (formules Traces de Meute et Grande Meute).
+
+## Compétences techniques
+
+Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Nuxt, PHP, Symfony, WordPress, Prisma, SQL, Supabase, Sass, Java, Linux, GitHub, Figma, Godot.
+
+## Pages principales
+
+- [Accueil](https://fablioo.com/) : présentation du studio, démarche, déroulement d'un projet et questions fréquentes.
+- [Services](https://fablioo.com/services) : détail des offres de création de sites web, d'identité visuelle et de maintenance.
+- [Portfolio](https://fablioo.com/portfolio) : projets clients réalisés, avec études de cas.
+- [Récits](https://fablioo.com/recits) : qui est Alexandre-Philippe Perez et l'histoire de Fablioo.
+- [Contact](https://fablioo.com/contact) : demande de devis.
+- [Mentions légales](https://fablioo.com/mentions-legales)

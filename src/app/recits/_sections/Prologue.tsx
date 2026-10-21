@@ -73,7 +73,7 @@ export default function Prologue({
               </Reveal>
               <Reveal delay={0.4}>
                 <p className="mt-4 text-lg font-bold text-prune md:mt-6 md:text-xl">
-                  Hola, moi c'est Alexandre !
+                  Hola, moi c'est Alexandre-Philippe Perez !
                 </p>
 
                 <p className="mt-2 max-w-xl text-base leading-relaxed text-encre/80 md:mt-4 md:text-lg">

@@ -32,7 +32,7 @@ export default function ProloguePhoto() {
       >
         <Image
           src="/illustrations/image de profil.jpg"
-          alt="Alexandre, fondateur de Fablioo"
+          alt="Alexandre-Philippe Perez, designer et développeur web à Grenoble, fondateur de Fablioo"
           fill
           className="object-cover"
         />
