@@ -14,11 +14,7 @@ export default function About() {
           <div className="lg:col-span-7">
             <Reveal delay={0}>
               <h2 className="text-4xl font-bold text-paper md:text-5xl">
-                Il était{" "}
-                <span className="text-sand font-quote font-semibold italic">
-                  deux fois
-                </span>{" "}
-                Fablioo
+                Il était deux fois Fablioo
               </h2>
             </Reveal>
 
@@ -47,8 +43,8 @@ export default function About() {
               <Reveal delay={0.4}>
                 <p className="max-w-2xl">
                   Basé à Saint-Martin-d'Hères, Fablioo crée vos identités
-                  visuelles et sites web sur mesure partout dans
-                  la région de <strong className="text-paper">Grenoble</strong>.
+                  visuelles et sites web sur mesure partout dans la région de{" "}
+                  <strong className="text-paper">Grenoble</strong>.
                 </p>
               </Reveal>
             </div>
@@ -77,7 +73,10 @@ export default function About() {
         </div>
       </div>
 
-      <WaveDivider src="/shapes/wave-divider.svg" fillerClassName="bg-[#eee9db]" />
+      <WaveDivider
+        src="/shapes/wave-divider.svg"
+        fillerClassName="bg-[#eee9db]"
+      />
     </section>
   );
 }

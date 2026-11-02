@@ -89,10 +89,7 @@ export default function ContactForm() {
           <Reveal className="lg:col-span-2">
             <div className="flex flex-col gap-6">
               <h1 className="text-4xl font-bold text-encre md:text-5xl">
-                Racontons{" "}
-                <span className="font-quote font-semibold italic text-rosewood">
-                  votre histoire
-                </span>
+                Racontons votre histoire
               </h1>
 
               <p className="text-lg leading-relaxed text-encre/80">

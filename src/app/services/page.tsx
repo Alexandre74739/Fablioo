@@ -128,8 +128,7 @@ export default function Services() {
       />
       <main>
         <Hero
-          title="Un accompagnement pensé pour"
-          highlight="votre histoire"
+          title="Un accompagnement pensé pour votre histoire"
           content="Identité visuelle, site web sur mesure et accompagnement continu, à Saint-Martin-d'Hères et Grenoble."
           label="Discuter de mon projet"
           href="/contact"

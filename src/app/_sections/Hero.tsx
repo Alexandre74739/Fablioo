@@ -84,18 +84,15 @@ export default function Hero({ content }: HeroProps) {
         <div className="absolute inset-0 z-26 flex -translate-y-8 flex-col items-center justify-center gap-6 px-6 text-center xl:translate-y-0">
           <Reveal delay={0.2}>
             <h1 className="max-w-4xl text-3xl text-encre sm:text-4xl md:text-5xl lg:text-6xl">
-              Un site web sur mesure qui raconte{" "}
-              <span className="font-quote font-semibold italic text-rosewood">
-                votre histoire
-              </span>
+              Un site web sur mesure qui raconte votre histoire
             </h1>
           </Reveal>
 
           <Reveal delay={0.4}>
             <p className="max-w-xl text-base leading-relaxed font-medium text-encre/80 md:text-lg lg:text-xl">
               Fablioo est un studio de création de sites web et de design à
-              Grenoble. On imagine votre identité visuelle et votre site
-              vitrine sur mesure, comme on écrirait un récit.
+              Grenoble. On imagine votre identité visuelle et votre site vitrine
+              sur mesure, comme on écrirait un récit.
             </p>
           </Reveal>
 

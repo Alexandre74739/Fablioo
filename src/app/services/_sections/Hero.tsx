@@ -10,7 +10,6 @@ import { useHeroParallax } from "@/hooks/useHeroParallax";
 
 interface HeroProps {
   title: string;
-  highlight: string;
   content: string;
   label: string;
   href: string;
@@ -18,7 +17,6 @@ interface HeroProps {
 
 export default function Hero({
   title,
-  highlight,
   content,
   label,
   href,
@@ -101,10 +99,7 @@ export default function Hero({
         <div className="absolute -mt-8 inset-0 z-35 flex flex-col items-center justify-center gap-6 px-6 text-center">
           <Reveal delay={0}>
             <h1 className="max-w-4xl sm:max-w-lg md:max-w-4xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-              {title}{" "}
-              <span className="font-quote font-semibold italic text-rosewood">
-                {highlight}
-              </span>
+              {title}
             </h1>
           </Reveal>
 
