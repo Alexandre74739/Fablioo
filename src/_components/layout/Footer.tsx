@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import Button from "@/_components/ui/Button";
 import LinkedinIcon from "@/_components/icons/LinkedinIcon";
 import GithubIcon from "@/_components/icons/GithubIcon";
+import ItchIoIcon from "@/_components/icons/ItchIoIcon";
 
 // Valeur JS (px) équivalente aux breakpoints Tailwind, recalculée au resize car useTransform ne peut pas lire des classes responsive.
 function getGrassMaxTranslate(width: number) {
@@ -40,6 +41,11 @@ const socialLinks = [
     label: "GitHub",
     href: "https://github.com/Alexandre74739",
     Icon: GithubIcon,
+  },
+  {
+    label: "itch.io",
+    href: "https://alexandre74739.itch.io/",
+    Icon: ItchIoIcon,
   },
 ];
 

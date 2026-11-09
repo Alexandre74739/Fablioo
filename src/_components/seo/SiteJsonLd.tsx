@@ -124,6 +124,7 @@ const siteJsonLd = {
         "https://perezpixel.com",
         "https://github.com/Alexandre74739",
         "https://www.linkedin.com/in/alexandre74739",
+        "https://alexandre74739.itch.io/",
       ],
     },
     {

@@ -20,6 +20,7 @@ import Button from "@/_components/ui/Button";
 import Input from "@/_components/ui/Input";
 import GithubIcon from "@/_components/icons/GithubIcon";
 import LinkedinIcon from "@/_components/icons/LinkedinIcon";
+import ItchIoIcon from "@/_components/icons/ItchIoIcon";
 
 const initialState: ContactFormState = { success: false, message: "" };
 
@@ -119,6 +120,17 @@ export default function ContactForm() {
                   >
                     <LinkedinIcon className="h-5 w-5 shrink-0 text-rosewood" />
                     linkedin.com/in/alexandre74739
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://alexandre74739.itch.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-underline flex w-fit items-center gap-3 text-encre/80 hover:text-rosewood"
+                  >
+                    <ItchIoIcon className="h-5 w-5 shrink-0 text-rosewood" />
+                    alexandre74739.itch.io
                   </a>
                 </li>
               </ul>
